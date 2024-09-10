@@ -27,14 +27,23 @@ class MainPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        child: const Row(
-          children: [
-            SizedBox(
-              height: 180,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 100,
+            left: -10,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0XffF4F9FF),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              height: 81,
+              width: 331,
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
