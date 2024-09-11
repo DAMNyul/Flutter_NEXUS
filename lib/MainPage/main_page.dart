@@ -42,7 +42,7 @@ class MainPage extends StatelessWidget {
               height: 81,
               width: 331,
             ),
-          )
+          ),
         ],
       ),
     );
