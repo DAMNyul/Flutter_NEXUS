@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -55,6 +54,19 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Stack(
         children: [
+          Positioned(
+            top: 145,
+            left: 290,
+            child: Container(
+              height: 60,
+              width: 60,
+              decoration: const BoxDecoration(
+                  color: Color(0xFFFFF5DB),
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(35),
+                  )),
+            ),
+          ),
           Positioned(
             top: 100,
             left: -10,
