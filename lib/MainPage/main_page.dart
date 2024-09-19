@@ -8,22 +8,25 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  // TextField의 입력 값을 관리할 TextEditingController 생성
   final TextEditingController _textController = TextEditingController();
+  int _selectedIndex = 0; // 현재 선택된 네비게이션 아이템 인덱스
 
   // 입력된 값을 저장하는 메서드
   void _saveInputValue() {
-    // 컨트롤러에서 현재 텍스트를 가져옵니다.
     String inputValue = _textController.text;
-    // 입력 값을 출력하거나 다른 곳에 저장하는 작업을 수행
-    print('입력된 값: $inputValue'); // 입력 값을 출력
-
+    print('입력된 값: $inputValue');
     _textController.clear();
+  }
+
+  // 네비게이션 아이템이 선택될 때 호출되는 메서드
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // 선택된 아이템의 인덱스를 업데이트
+    });
   }
 
   @override
   void dispose() {
-    // 화면이 사라질 때 컨트롤러를 해제
     _textController.dispose();
     super.dispose();
   }
@@ -61,10 +64,11 @@ class _MainPageState extends State<MainPage> {
               height: 60,
               width: 60,
               decoration: const BoxDecoration(
-                  color: Color(0xFFFFF5DB),
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(35),
-                  )),
+                color: Color(0xFFFFF5DB),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(35),
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -97,7 +101,7 @@ class _MainPageState extends State<MainPage> {
             left: 100,
             child: Container(
               width: 200,
-              height: 25, // 컨테이너 높이 유지
+              height: 25,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -110,7 +114,7 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
               child: TextField(
-                controller: _textController, // TextEditingController 연결
+                controller: _textController,
                 decoration: const InputDecoration(
                   hintText: "Search",
                   isCollapsed: true,
@@ -123,11 +127,30 @@ class _MainPageState extends State<MainPage> {
                 ),
                 style: const TextStyle(fontSize: 14),
                 textAlignVertical: TextAlignVertical.center,
-                onSubmitted: (_) => _saveInputValue(), // 입력 완료 시 값 저장
+                onSubmitted: (_) => _saveInputValue(),
               ),
             ),
           ),
         ],
+      ),
+      // 하단 네비게이션 바 추가
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex, // 선택된 아이템 인덱스
+        onTap: _onItemTapped, // 아이템 선택 시 호출될 메서드
       ),
     );
   }
