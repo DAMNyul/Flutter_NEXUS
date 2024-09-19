@@ -139,7 +139,7 @@ class _MainPageState extends State<MainPage> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'image/test.svg',
+              'assets/image/test.svg',
               width: 30,
               height: 30,
             ),
