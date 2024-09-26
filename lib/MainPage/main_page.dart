@@ -137,11 +137,15 @@ class _MainPageState extends State<MainPage> {
       // 하단 네비게이션 바 추가
       bottomNavigationBar: BottomNavigationBar(
         items: [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'image/test.svg',
             ),
-            label: 'Home',
+            label: 'Project',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.search),
