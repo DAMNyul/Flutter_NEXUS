@@ -139,19 +139,18 @@ class _MainPageState extends State<MainPage> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/image/home.svg',
+              'image/home.svg',
             ),
-            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/image/project.svg',
+              'image/project.svg',
             ),
-            label: 'Project',
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'image/chat.svg',
+            ),
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.person),

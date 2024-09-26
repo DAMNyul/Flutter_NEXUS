@@ -22,8 +22,6 @@ environment:
   sdk: ^3.5.1
 
 
-assets:
-  - assets/image/
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -62,6 +60,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
+  assets:
+  - image/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
