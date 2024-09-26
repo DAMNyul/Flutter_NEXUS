@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   // 네비게이션 아이템이 선택될 때 호출되는 메서드
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // 선택된 아이템의 인덱스를 업데이트
+      _selectedIndex = index;
     });
   }
 
@@ -93,7 +93,7 @@ class _MainPageState extends State<MainPage> {
               "Search",
               style: TextStyle(
                 fontSize: 15,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ),
@@ -132,8 +132,42 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
+          Positioned(
+            top: 300,
+            left: -20,
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    SizedBox(
+                      width: 207,
+                      height: 227,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF4F9FF),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    const Positioned(
+                      top: 15,
+                      left: 50,
+                      child: Text(
+                        "Best Project",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
+
       // 하단 네비게이션 바 추가
       bottomNavigationBar: BottomNavigationBar(
         items: [
@@ -155,9 +189,16 @@ class _MainPageState extends State<MainPage> {
             ),
             label: '',
           ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              width: 45,
+              'image/profile.svg',
+            ),
+            label: '',
+          )
         ],
         currentIndex: _selectedIndex, // 선택된 아이템 인덱스
-        onTap: _onItemTapped, // 아이템 선택 시 호출될 메서드
+        onTap: _onItemTapped,
       ),
     );
   }
