@@ -141,20 +141,19 @@ class _MainPageState extends State<MainPage> {
             icon: SvgPicture.asset(
               'image/home.svg',
             ),
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'image/project.svg',
             ),
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'image/chat.svg',
             ),
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            label: '',
           ),
         ],
         currentIndex: _selectedIndex, // 선택된 아이템 인덱스
