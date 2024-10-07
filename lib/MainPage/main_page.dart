@@ -10,16 +10,14 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final TextEditingController _textController = TextEditingController();
-  int _selectedIndex = 0; // 현재 선택된 네비게이션 아이템 인덱스
+  int _selectedIndex = 0;
 
-  // 입력된 값을 저장하는 메서드
   void _saveInputValue() {
     String inputValue = _textController.text;
     print('입력된 값: $inputValue');
     _textController.clear();
   }
 
-  // 네비게이션 아이템이 선택될 때 호출되는 메서드
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -43,166 +41,102 @@ class _MainPageState extends State<MainPage> {
               Icons.menu_sharp,
               size: 30,
             ),
-            SizedBox(
-              width: 10,
-            ),
+            SizedBox(width: 10),
             Text(
               'NEXUS',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0), // 전체 여백 추가
+        child: Column(
+          children: [
+            // 검색 영역
+            Container(
+              height: 81,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF4F9FF),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 15, left: 10),
+                    child: Text(
+                      "Search",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  TextField(
+                    controller: _textController,
+                    decoration: const InputDecoration(
+                      hintText: "Search",
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                      border: InputBorder.none,
+                      suffixIcon: Icon(Icons.search, size: 18),
+                    ),
+                    style: const TextStyle(fontSize: 14),
+                    textAlignVertical: TextAlignVertical.center,
+                    onSubmitted: (_) => _saveInputValue(),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20), // 검색 영역과 다음 영역 사이의 간격
+
+            // 베스트 프로젝트 영역
+            Container(
+              width: double.infinity, // 전체 너비 사용
+              height: 227,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF4F9FF),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      "Best Project",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: const [
+                        ListTile(
+                          title: Text(
+                            "Test",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        ),
+                        // 추가 항목을 여기에 추가
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 145,
-            left: 290,
-            child: Container(
-              height: 60,
-              width: 60,
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFF5DB),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(35),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 100,
-            left: -10,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFFF4F9FF),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              height: 81,
-              width: 331,
-            ),
-          ),
-          const Positioned(
-            top: 110,
-            left: 30,
-            child: Text(
-              "Search",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 140,
-            left: 100,
-            child: Container(
-              width: 200,
-              height: 25,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: _textController,
-                decoration: const InputDecoration(
-                  hintText: "Search",
-                  isCollapsed: true,
-                  contentPadding: EdgeInsets.only(left: 8, right: 8),
-                  border: InputBorder.none,
-                  suffixIcon: Icon(
-                    Icons.search,
-                    size: 18,
-                  ),
-                ),
-                style: const TextStyle(fontSize: 14),
-                textAlignVertical: TextAlignVertical.center,
-                onSubmitted: (_) => _saveInputValue(),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 300,
-            left: -20,
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      width: 207,
-                      height: 227,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF4F9FF),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      top: 15,
-                      left: 50,
-                      child: Text(
-                        "Best Project",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      child: Column(
-                        children: [
-                          ListView(
-                            children: const [
-                              Text(
-                                "Test",
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-
-      // 하단 네비게이션 바 추가
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'image/home.svg',
-            ),
+            icon: SvgPicture.asset('image/home.svg'),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'image/project.svg',
-            ),
+            icon: SvgPicture.asset('image/project.svg'),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'image/chat.svg',
-            ),
+            icon: SvgPicture.asset('image/chat.svg'),
             label: '',
           ),
           BottomNavigationBarItem(
@@ -211,9 +145,9 @@ class _MainPageState extends State<MainPage> {
               'image/profile.svg',
             ),
             label: '',
-          )
+          ),
         ],
-        currentIndex: _selectedIndex, // 선택된 아이템 인덱스
+        currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
