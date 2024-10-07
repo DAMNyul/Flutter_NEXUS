@@ -53,9 +53,12 @@ class _MainPageState extends State<MainPage> {
         padding: const EdgeInsets.all(16.0), // 전체 여백 추가
         child: Column(
           children: [
+            const SizedBox(
+              height: 60,
+            ),
             // 검색 영역
             Container(
-              height: 81,
+              height: 90,
               decoration: BoxDecoration(
                 color: const Color(0xFFF4F9FF),
                 borderRadius: BorderRadius.circular(10),
@@ -75,7 +78,8 @@ class _MainPageState extends State<MainPage> {
                     decoration: const InputDecoration(
                       hintText: "Search",
                       isCollapsed: true,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                       border: InputBorder.none,
                       suffixIcon: Icon(Icons.search, size: 18),
                     ),
@@ -86,7 +90,7 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20), // 검색 영역과 다음 영역 사이의 간격
+            const SizedBox(height: 120), // 검색 영역과 다음 영역 사이의 간격
 
             // 베스트 프로젝트 영역
             Container(
