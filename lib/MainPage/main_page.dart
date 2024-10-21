@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -296,9 +298,11 @@ class _MainPageState extends State<MainPage> {
                                 NexusCard(),
                                 SizedBox(width: 20),
                                 NexusCard(),
-                                SizedBox(
-                                  width: 20,
-                                ),
+                                SizedBox(width: 20),
+                                NexusCard(),
+                                SizedBox(width: 20),
+                                NexusCard(),
+                                SizedBox(width: 20),
                               ],
                             ),
                           ),
