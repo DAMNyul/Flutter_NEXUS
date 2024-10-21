@@ -83,24 +83,43 @@ class _FootNavigatorState extends State<FootNavigator> {
     return NavigationBar(
       destinations: [
         NavigationDestination(
-          icon: SvgPicture.asset('image/home.svg'),
-          label: '',
-        ),
-        NavigationDestination(
-          icon: SvgPicture.asset('image/project.svg'),
-          label: '',
-        ),
-        NavigationDestination(
-          icon: SvgPicture.asset('image/chat.svg'),
-          label: '',
-        ),
-        NavigationDestination(
+          selectedIcon: SvgPicture.asset(
+            'image/clicked_home.svg',
+          ),
           icon: SvgPicture.asset(
-            width: 45,
-            'image/profile.svg',
+            'image/home.svg',
           ),
           label: '',
-        )
+        ),
+        NavigationDestination(
+          selectedIcon: SvgPicture.asset(
+            'image/clicked_project.svg',
+          ),
+          icon: SvgPicture.asset(
+            'image/project.svg',
+          ),
+          label: '',
+        ),
+        NavigationDestination(
+          selectedIcon: SvgPicture.asset(
+            'image/clicked_chat.svg',
+          ),
+          icon: SvgPicture.asset(
+            'image/chat.svg',
+          ),
+          label: '',
+        ),
+        NavigationDestination(
+          selectedIcon: SvgPicture.asset(
+            'image/clicked_profile.svg',
+            width: 45,
+          ),
+          icon: SvgPicture.asset(
+            'image/profile.svg',
+            width: 45,
+          ),
+          label: '',
+        ),
       ],
       onDestinationSelected: (index) {
         Provider.of<CurrentPageProvider>(context, listen: false)
