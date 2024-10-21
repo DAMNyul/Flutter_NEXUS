@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -283,16 +281,17 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                     ),
-                    const Positioned(
+                    Positioned(
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 55,
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
+                          SizedBox(
+                            height: 100, // ListView의 고정 높이 설정
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: const [
                                 NexusCard(),
                                 SizedBox(width: 20), // 카드 간격
                                 NexusCard(),
