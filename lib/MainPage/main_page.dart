@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_nexus/ProjectPage/project_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NexusCard extends StatelessWidget {
