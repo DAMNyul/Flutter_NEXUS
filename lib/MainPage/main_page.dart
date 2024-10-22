@@ -138,15 +138,14 @@ class NexusCard extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 8), // 간격 조정
+          const SizedBox(height: 8),
 
-          // 진행중 상태 텍스트
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.circle,
-                size: 10, // 아이콘 크기를 줄임
+                size: 10,
                 color: Colors.green,
               ),
               SizedBox(width: 5),
@@ -202,7 +201,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        // 전체 내용을 스크롤 가능하게 만듭니다.
         child: Stack(
           children: [
             Positioned(
@@ -245,6 +243,8 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             const Positioned(
+              top: 150,
+              left: 30,
               child: NexusSearchBox(),
             ),
             Positioned(
@@ -284,7 +284,7 @@ class _MainPageState extends State<MainPage> {
                           child: ListView(
                             physics:
                                 const NeverScrollableScrollPhysics(), // 스크롤 비활성화
-                            shrinkWrap: true, // 부모로부터 크기 제약을 받도록 설정
+                            shrinkWrap: true,
                             children: const [],
                           ),
                         ),
@@ -299,6 +299,7 @@ class _MainPageState extends State<MainPage> {
                               width: MediaQuery.of(context).size.width,
                               height: 100,
                               child: ListView(
+                                shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
                                 children: const [
                                   NexusCard(),
