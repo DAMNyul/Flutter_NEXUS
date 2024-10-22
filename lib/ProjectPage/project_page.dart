@@ -6,15 +6,20 @@ class NexusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double cardWidth = screenWidth * 0.386;
+    double cardHeight = cardWidth * (212 / 160);
+
     return Container(
-      width: 160,
-      height: 212,
+      width: cardWidth,
+      height: cardHeight,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.grey.withOpacity(0.5), // 외각선 색상
-          width: 2, // 외각선 두께
+          color: Colors.grey.withOpacity(0.5),
+          width: 2,
         ),
         boxShadow: [
           BoxShadow(
@@ -28,59 +33,56 @@ class NexusCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // 아이콘 부분
           Container(
-            padding: const EdgeInsets.all(10), // 패딩을 줄임
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: const Color(0xFF00DA71).withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: SvgPicture.asset(
               'image/project.svg',
-              width: 40, // 아이콘 크기를 줄임
-              height: 40,
+              width: cardWidth * 0.25,
+              height: cardWidth * 0.25,
               color: const Color(0xFF00DA71),
             ),
           ),
-          const SizedBox(height: 12), // 간격 조정
+          const SizedBox(height: 12),
 
           // NEXUS 텍스트
-          const Text(
+          Text(
             "NEXUS",
             style: TextStyle(
-              fontSize: 16, // 폰트 크기를 줄임
+              fontSize: cardWidth * 0.1,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 8), // 간격 조정
+          const SizedBox(height: 8),
 
-          // 진행중 상태 텍스트
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.circle,
-                size: 10, // 아이콘 크기를 줄임
+                size: cardWidth * 0.06,
                 color: Colors.green,
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               Text(
                 "진행중",
                 style: TextStyle(
-                  fontSize: 11, // 폰트 크기를 줄임
+                  fontSize: cardWidth * 0.07,
                   color: Colors.black,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 24), // 간격 조정
+          const SizedBox(height: 24),
 
-          // 하단 텍스트
-          const Text(
+          Text(
             "이세민 외 5명",
             style: TextStyle(
-              fontSize: 10, // 폰트 크기를 줄임
+              fontSize: cardWidth * 0.06,
               color: Colors.black,
             ),
           ),
