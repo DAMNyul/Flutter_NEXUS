@@ -8,8 +8,8 @@ class NexusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160,
-      height: 212,
+      width: 150,
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -225,13 +225,25 @@ class _MainPageState extends State<MainPage> {
                 ),
                 width: 210,
                 height: 300,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                child: const Text(
-                  "Best Project",
-                  style: TextStyle(
-                    fontSize: 17.5,
-                    fontWeight: FontWeight.w600,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
+                  ),
+                  child: const Column(
+                    children: [
+                      Text(
+                        "Best Project",
+                        style: TextStyle(
+                          fontSize: 17.5,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      NexusCard(),
+                    ],
                   ),
                 ),
               ),
