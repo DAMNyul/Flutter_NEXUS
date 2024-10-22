@@ -1,90 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-class NexusSearchBox extends StatefulWidget {
-  const NexusSearchBox({super.key});
-
-  @override
-  _NexusSearchBoxState createState() => _NexusSearchBoxState();
-}
-
-class _NexusSearchBoxState extends State<NexusSearchBox> {
-  final TextEditingController _textController = TextEditingController();
-  String userInput = ""; // 사용자의 입력을 저장할 변수
-
-  void _saveInputValue() {
-    // 입력 값을 처리하는 로직
-    String inputValue = _textController.text;
-    print(inputValue); // 예: 입력값을 출력
-    // 여기서 원하는 로직을 추가할 수 있습니다.
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 140,
-          left: 100,
-          child: Container(
-            width: 200,
-            height: 25,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: _textController,
-              decoration: const InputDecoration(
-                hintText: "Search",
-                contentPadding: EdgeInsets.only(left: 8, right: 8),
-                border: InputBorder.none,
-                suffixIcon: Icon(
-                  Icons.search,
-                  size: 18,
-                ),
-              ),
-              style: const TextStyle(fontSize: 14),
-              textAlignVertical: TextAlignVertical.center,
-              onChanged: (value) {
-                setState(() {
-                  userInput = value; // 사용자가 입력하는 텍스트를 저장
-                });
-              },
-              onSubmitted: (value) {
-                _saveInputValue(); // 입력값을 저장하고 다른 처리를 수행
-                _textController.clear(); // 입력 필드 초기화
-                setState(() {
-                  userInput = ""; // 입력 값을 초기화
-                });
-              },
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Positioned(
-          top: 170, // 텍스트 위치 조정
-          left: 100,
-          child: Text(
-            userInput,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+import 'package:flutter/rendering.dart';
+import 'package:flutter_nexus/ProjectPage/project_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NexusCard extends StatelessWidget {
   const NexusCard({super.key});
@@ -138,8 +55,7 @@ class NexusCard extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 8), // 간격 조정
-
+          const SizedBox(height: 8),
           // 진행중 상태 텍스트
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -159,8 +75,7 @@ class NexusCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24), // 간격 조정
-
+          const SizedBox(height: 24),
           // 하단 텍스트
           const Text(
             "이세민 외 5명",
@@ -179,149 +94,150 @@ class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
   final TextEditingController _textController = TextEditingController();
+  String userInput = ""; // 사용자의 입력을 저장할 변수
 
-  // 입력된 값을 저장하는 메서드
   void _saveInputValue() {
+    // 입력 값을 처리하는 로직
     String inputValue = _textController.text;
-    print('입력된 값: $inputValue');
-    _textController.clear();
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
+    print(inputValue); // 예: 입력값을 출력
+    // 여기서 원하는 로직을 추가할 수 있습니다.
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 145,
-            left: 290,
-            child: Container(
-              height: 60,
-              width: 60,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 90,
+        ),
+        Stack(
+          children: [
+            Transform.translate(
+              offset: const Offset(-65, 0),
+              child: Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 200,
+                ),
+                child: Transform.translate(
+                  offset: const Offset(120, 60),
+                  child: const Icon(
+                    Icons.circle,
+                    color: Color(0xffFFF5DB),
+                    size: 150,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 20,
+              ),
               decoration: const BoxDecoration(
-                color: Color(0xFFFFF5DB),
+                color: Color(0xffF4F9FF),
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(35),
+                  bottomRight: Radius.circular(15),
+                  topRight: Radius.circular(15),
                 ),
               ),
+              width: 315,
+              height: 120,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Search',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white,
+                    ),
+                    width: 250,
+                    height: 45,
+                    child: TextField(
+                      controller: _textController,
+                      decoration: const InputDecoration(
+                        hintText: "Search",
+                        contentPadding: EdgeInsets.only(left: 8, right: 8),
+                        border: InputBorder.none,
+                        suffixIcon: Icon(
+                          Icons.search,
+                          size: 18,
+                        ),
+                      ),
+                      style: const TextStyle(fontSize: 14),
+                      textAlignVertical: TextAlignVertical.center,
+                      onChanged: (value) {
+                        setState(() {
+                          userInput = value; // 사용자가 입력하는 텍스트를 저장
+                        });
+                      },
+                      onSubmitted: (value) {
+                        _saveInputValue(); // 입력값을 저장하고 다른 처리를 수행
+                        _textController.clear(); // 입력 필드 초기화
+                        setState(
+                          () {
+                            userInput = ""; // 입력 값을 초기화
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: 100,
-            left: -10,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFFF4F9FF),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+          ],
+        ),
+        const SizedBox(
+          height: 75,
+        ),
+        Transform.translate(
+          offset: const Offset(-100, 0),
+          child: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Color(0xffF4F9FF),
+                ),
+                width: 210,
+                height: 300,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                child: const Text(
+                  "Best Project",
+                  style: TextStyle(
+                    fontSize: 17.5,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-              height: 81,
-              width: 331,
-            ),
+            ],
           ),
-          const Positioned(
-            top: 110,
-            left: 30,
-            child: Text(
-              "Search",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-          const Positioned(
-            child: NexusSearchBox(),
-          ),
-          Positioned(
-            top: 300,
-            left: -20,
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      width: 207,
-                      height: 227,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF4F9FF),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      top: 15,
-                      left: 50,
-                      child: Text(
-                        "Best Project",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 50,
-                      left: 10,
-                      child: SizedBox(
-                        width: 180,
-                        height: 150, // 고정된 높이를 제공하여 레이아웃 문제 해결
-                        child: ListView(
-                          physics:
-                              const NeverScrollableScrollPhysics(), // 스크롤 비활성화
-                          shrinkWrap: true, // 부모로부터 크기 제약을 받도록 설정
-                          children: const [],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 55,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 100,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: const [
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

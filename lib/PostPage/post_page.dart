@@ -5,8 +5,24 @@ class PostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("Post Page"),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Row(
+                children: [
+                  Container(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
