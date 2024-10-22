@@ -44,7 +44,6 @@ class _NexusSearchBoxState extends State<NexusSearchBox> {
               controller: _textController,
               decoration: const InputDecoration(
                 hintText: "Search",
-                isCollapsed: true,
                 contentPadding: EdgeInsets.only(left: 8, right: 8),
                 border: InputBorder.none,
                 suffixIcon: Icon(
@@ -69,11 +68,18 @@ class _NexusSearchBoxState extends State<NexusSearchBox> {
             ),
           ),
         ),
-        // 입력된 값을 실시간으로 보여주는 Text 위젯 (옵션)
+        const SizedBox(
+          height: 10,
+        ),
         Positioned(
           top: 170, // 텍스트 위치 조정
           left: 100,
-          child: Text(userInput),
+          child: Text(
+            userInput,
+            style: const TextStyle(
+              fontSize: 14,
+            ),
+          ),
         ),
       ],
     );
@@ -86,8 +92,8 @@ class NexusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160, // 카드 너비 (변경 없음)
-      height: 212, // 카드 높이 (변경 없음)
+      width: 160,
+      height: 212,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -288,12 +294,13 @@ class _MainPageState extends State<MainPage> {
                             height: 55,
                           ),
                           SizedBox(
-                            height: 100, // ListView의 고정 높이 설정
+                            width: MediaQuery.of(context).size.width,
+                            height: 100,
                             child: ListView(
                               scrollDirection: Axis.horizontal,
                               children: const [
                                 NexusCard(),
-                                SizedBox(width: 20), // 카드 간격
+                                SizedBox(width: 20),
                                 NexusCard(),
                                 SizedBox(width: 20),
                                 NexusCard(),
