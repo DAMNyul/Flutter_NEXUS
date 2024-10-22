@@ -294,7 +294,7 @@ class _MainPageState extends State<MainPage> {
                             height: 55,
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width,
+                            width: double.infinity,
                             height: 100,
                             child: ListView(
                               scrollDirection: Axis.horizontal,
