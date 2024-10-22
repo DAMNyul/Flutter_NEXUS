@@ -55,7 +55,8 @@ class NexusCard extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 8), // 간격 조정
+
           // 진행중 상태 텍스트
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +76,8 @@ class NexusCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 24), // 간격 조정
+
           // 하단 텍스트
           const Text(
             "이세민 외 5명",
@@ -208,7 +210,7 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
         const SizedBox(
-          height: 75,
+          height: 100,
         ),
         Transform.translate(
           offset: const Offset(-100, 0),
