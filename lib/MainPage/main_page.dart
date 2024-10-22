@@ -201,126 +201,129 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 145,
-            left: 290,
-            child: Container(
-              height: 60,
-              width: 60,
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFF5DB),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(35),
+      body: SingleChildScrollView(
+        // 전체 내용을 스크롤 가능하게 만듭니다.
+        child: Stack(
+          children: [
+            Positioned(
+              top: 145,
+              left: 290,
+              child: Container(
+                height: 60,
+                width: 60,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFF5DB),
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(35),
+                  ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: 100,
-            left: -10,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFFF4F9FF),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+            Positioned(
+              top: 100,
+              left: -10,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF4F9FF),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                height: 81,
+                width: 331,
+              ),
+            ),
+            const Positioned(
+              top: 110,
+              left: 30,
+              child: Text(
+                "Search",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-              height: 81,
-              width: 331,
             ),
-          ),
-          const Positioned(
-            top: 110,
-            left: 30,
-            child: Text(
-              "Search",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
+            const Positioned(
+              child: NexusSearchBox(),
             ),
-          ),
-          const Positioned(
-            child: NexusSearchBox(),
-          ),
-          Positioned(
-            top: 300,
-            left: -20,
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      width: 207,
-                      height: 227,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF4F9FF),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      top: 15,
-                      left: 50,
-                      child: Text(
-                        "Best Project",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 50,
-                      left: 10,
-                      child: SizedBox(
-                        width: 180,
-                        height: 150, // 고정된 높이를 제공하여 레이아웃 문제 해결
-                        child: ListView(
-                          physics:
-                              const NeverScrollableScrollPhysics(), // 스크롤 비활성화
-                          shrinkWrap: true, // 부모로부터 크기 제약을 받도록 설정
-                          children: const [],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 55,
+            Positioned(
+              top: 300,
+              left: -20,
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      SizedBox(
+                        width: 207,
+                        height: 227,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF4F9FF),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 100,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: const [
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                                NexusCard(),
-                                SizedBox(width: 20),
-                              ],
+                        ),
+                      ),
+                      const Positioned(
+                        top: 15,
+                        left: 50,
+                        child: Text(
+                          "Best Project",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 50,
+                        left: 10,
+                        child: SizedBox(
+                          width: 180,
+                          height: 150,
+                          child: ListView(
+                            physics:
+                                const NeverScrollableScrollPhysics(), // 스크롤 비활성화
+                            shrinkWrap: true, // 부모로부터 크기 제약을 받도록 설정
+                            children: const [],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 50,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 100,
+                              child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: const [
+                                  NexusCard(),
+                                  SizedBox(width: 20),
+                                  NexusCard(),
+                                  SizedBox(width: 20),
+                                  NexusCard(),
+                                  SizedBox(width: 20),
+                                  NexusCard(),
+                                  SizedBox(width: 20),
+                                  NexusCard(),
+                                  SizedBox(width: 20),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
