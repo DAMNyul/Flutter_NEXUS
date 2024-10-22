@@ -298,21 +298,22 @@ class _MainPageState extends State<MainPage> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 100,
-                              child: ListView(
-                                shrinkWrap: true,
+                              child: const SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                children: const [
-                                  NexusCard(),
-                                  SizedBox(width: 20),
-                                  NexusCard(),
-                                  SizedBox(width: 20),
-                                  NexusCard(),
-                                  SizedBox(width: 20),
-                                  NexusCard(),
-                                  SizedBox(width: 20),
-                                  NexusCard(),
-                                  SizedBox(width: 20),
-                                ],
+                                child: Row(
+                                  children: [
+                                    NexusCard(),
+                                    SizedBox(width: 20),
+                                    NexusCard(),
+                                    SizedBox(width: 20),
+                                    NexusCard(),
+                                    SizedBox(width: 20),
+                                    NexusCard(),
+                                    SizedBox(width: 20),
+                                    NexusCard(),
+                                    SizedBox(width: 20),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
