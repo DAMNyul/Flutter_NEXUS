@@ -142,8 +142,9 @@ class FullPage extends StatelessWidget {
                         _buildRow("지원 자격", ""),
                         _buildCustomRow(
                           svgPath: 'image/javaScript.svg',
-                          textColor: Colors.blue,
-                          backgroundColor: Colors.blue.withOpacity(0.1),
+                          textColor: const Color(0xffF7DF1E),
+                          backgroundColor:
+                              const Color(0xffF7DF1E).withOpacity(0.1),
                           textValue: "JavaScript",
                         ),
                       ],
@@ -193,13 +194,11 @@ Widget _buildCustomRow({
       children: [
         SvgPicture.asset(
           svgPath,
-          width: 10, // 원하는 크기로 조정
-          height: 10, // 원하는 크기로 조정
         ),
         const SizedBox(width: 3),
         Text(
           textValue,
-          style: TextStyle(color: textColor, fontSize: 10), // 텍스트 크기 조정
+          style: TextStyle(color: textColor, fontSize: 10),
         ),
       ],
     ),
