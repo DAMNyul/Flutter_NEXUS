@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/ProjectPage/full_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NexusCard extends StatelessWidget {
@@ -98,22 +99,36 @@ class TwoOfNexusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       children: [
         Row(
           children: [
-            const NexusCard(),
-            SizedBox(
-              width: screenWidth * 0.063,
+            GestureDetector(
+              onTap: () {
+                // FullPage로 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const FullPage()),
+                );
+              },
+              child: const NexusCard(),
             ),
-            const NexusCard(),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.063,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const FullPage()),
+                );
+              },
+              child: const NexusCard(),
+            ),
           ],
         ),
         SizedBox(
-          height: screenHeight * 0.05,
+          height: MediaQuery.of(context).size.height * 0.05,
         ),
       ],
     );
@@ -163,7 +178,7 @@ class ProjectPage extends StatelessWidget {
               children: const [
                 Column(
                   children: [
-                    TwoOfNexusCard(), //db 연결해서 카드 받기
+                    TwoOfNexusCard(), // db 연결해서 카드 받기
                     TwoOfNexusCard(),
                     TwoOfNexusCard(),
                     TwoOfNexusCard(),
