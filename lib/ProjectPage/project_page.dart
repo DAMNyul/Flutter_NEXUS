@@ -97,19 +97,22 @@ class TwoOfNexusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    return Column(
       children: [
         Row(
           children: [
-            NexusCard(),
+            const NexusCard(),
             SizedBox(
-              width: 25,
+              width: screenWidth * 0.063,
             ),
-            NexusCard(),
+            const NexusCard(),
           ],
         ),
         SizedBox(
-          height: 35,
+          height: screenHeight * 0.05,
         ),
       ],
     );
@@ -159,7 +162,7 @@ class ProjectPage extends StatelessWidget {
               children: const [
                 Column(
                   children: [
-                    TwoOfNexusCard(),
+                    TwoOfNexusCard(), //db 연결해서 카드 받기
                     TwoOfNexusCard(),
                     TwoOfNexusCard(),
                     TwoOfNexusCard(),
