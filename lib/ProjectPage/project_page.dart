@@ -95,6 +95,7 @@ class NexusCard extends StatelessWidget {
 }
 
 class TwoOfNexusCard extends StatelessWidget {
+  //db 정보를 받아서 카드 로딩
   const TwoOfNexusCard({super.key});
 
   @override
@@ -105,7 +106,6 @@ class TwoOfNexusCard extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                // FullPage로 이동
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const FullPage()),
@@ -178,7 +178,7 @@ class ProjectPage extends StatelessWidget {
               children: const [
                 Column(
                   children: [
-                    TwoOfNexusCard(), // db 연결해서 카드 받기
+                    TwoOfNexusCard(),
                     TwoOfNexusCard(),
                     TwoOfNexusCard(),
                     TwoOfNexusCard(),
