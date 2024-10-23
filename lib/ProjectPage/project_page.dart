@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NexusCard extends StatelessWidget {
+  //카드 정보 db 로 받아서 저장
   const NexusCard({super.key});
 
   @override
