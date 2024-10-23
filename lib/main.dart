@@ -50,6 +50,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return AppBar(
+      backgroundColor: Colors.white,
       title: Row(
         children: [
           IconButton(
@@ -81,6 +82,7 @@ class _FootNavigatorState extends State<FootNavigator> {
   Widget build(BuildContext context) {
     // final ThemeData theme = Theme.of(context);
     return NavigationBar(
+      backgroundColor: Colors.white,
       destinations: [
         NavigationDestination(
           selectedIcon: SvgPicture.asset(
