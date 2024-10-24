@@ -131,29 +131,73 @@ class FullPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Column(
-                      children: [
-                        _buildRow("모집 분야", "FrontEnd"),
-                        const SizedBox(height: 10),
-                        _buildRow("모집 인원", "2인"),
-                        const SizedBox(height: 10),
-                        _buildRow("지원 자격", ""),
-                        _buildCustomRow(
-                          svgPath: 'image/javaScript.svg',
-                          textColor: const Color(0xffF7DF1E),
-                          backgroundColor:
-                              const Color(0xffF7DF1E).withOpacity(0.1),
-                          textValue: "JavaScript",
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      _buildRow("모집 분야", "FrontEnd"),
+                      const SizedBox(height: 10),
+                      _buildRow("모집 인원", "2인"),
+                      const SizedBox(height: 10),
+                      _buildRow("지원 자격", ""),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 20),
+                            child: _buildCustomRow(
+                              svgPath: 'image/javaScript.svg',
+                              textColor: const Color(0xffF7DF1E),
+                              backgroundColor:
+                                  const Color(0xffF7DF1E).withOpacity(0.1),
+                              textValue: "JavaScript",
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: _buildCustomRow(
+                              svgPath: 'image/react.svg',
+                              textColor: const Color(0xff00D8FF),
+                              backgroundColor:
+                                  const Color(0xff00D8FF).withOpacity(0.1),
+                              textValue: "React",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
+          const Positioned(
+            top: 480,
+            left: 30,
+            child: Column(
+              children: [
+                Text(
+                  "프로젝트 소개",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "프로젝트 소개",
+                    softWrap: true,
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -184,16 +228,18 @@ Widget _buildCustomRow({
   required String textValue,
 }) {
   return Container(
-    width: 70,
-    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
     decoration: BoxDecoration(
       color: backgroundColor,
       borderRadius: BorderRadius.circular(7),
     ),
     child: Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         SvgPicture.asset(
           svgPath,
+          width: 12,
+          height: 12,
         ),
         const SizedBox(width: 3),
         Text(
