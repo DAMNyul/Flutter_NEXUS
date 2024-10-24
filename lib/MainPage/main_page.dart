@@ -142,67 +142,63 @@ class _MainPageState extends State<MainPage> {
               ),
             ],
           ),
-          Transform.translate(
-            offset: const Offset(-70, 0),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  clipBehavior: Clip.none,
-                  decoration: const BoxDecoration(
-                    color: Color(0xffF4F9FF),
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xffF4F9FF),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
-                  width: 210,
-                  height: 270,
-                  child: const Column(
+                ),
+                width: 200,
+                height: 300,
+              ),
+              const Column(
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 7,
-                              vertical: 20,
-                            ),
-                          ),
-                          Text(
-                            "Best Project",
-                            style: TextStyle(
-                              fontSize: 17.5,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 7,
+                          vertical: 20,
+                        ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5),
-                            ),
-                            NexusCard(),
-                            SizedBox(width: 10),
-                            NexusCard(),
-                            SizedBox(width: 10),
-                            NexusCard(),
-                            SizedBox(width: 10),
-                            NexusCard(),
-                            SizedBox(width: 10),
-                          ],
+                      Text(
+                        "Best Project",
+                        style: TextStyle(
+                          fontSize: 17.5,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                        ),
+                        NexusCard(),
+                        SizedBox(width: 10),
+                        NexusCard(),
+                        SizedBox(width: 10),
+                        NexusCard(),
+                        SizedBox(width: 10),
+                        NexusCard(),
+                        SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
