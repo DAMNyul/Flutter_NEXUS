@@ -41,7 +41,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       width: 350,
-                      height: 150,
+                      height: 130,
                       child: Transform.translate(
                         offset: const Offset(160, 65),
                         child: Container(
