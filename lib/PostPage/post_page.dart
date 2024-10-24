@@ -6,7 +6,11 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text("Post Page"),
+      body: Column(
+        children: [
+          SingleChildScrollView(),
+        ],
+      ),
     );
   }
 }
