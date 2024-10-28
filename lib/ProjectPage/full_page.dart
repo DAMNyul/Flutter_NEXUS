@@ -27,20 +27,20 @@ class FullPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          const Positioned(
-            top: 90,
-            left: 150,
+          Positioned(
+            top: screenSize.height * 0.1,
+            left: screenSize.width * 0.4,
             child: Text(
               "NEXUS",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: screenSize.width * 0.045,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
-          const Positioned(
-            top: 120,
-            left: 150,
+          Positioned(
+            top: screenSize.height * 0.13,
+            left: screenSize.width * 0.4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,31 +48,25 @@ class FullPage extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.circle,
-                      size: 13,
-                      color: Color(0xffFF9900),
+                      size: screenSize.width * 0.035,
+                      color: const Color(0xffFF9900),
                     ),
-                    SizedBox(
-                      width: 3,
-                    ),
+                    SizedBox(width: screenSize.width * 0.01),
                     Text(
                       "모집중",
                       style: TextStyle(
-                        color: Color(
-                          0xff757575,
-                        ),
+                        color: const Color(0xff757575),
+                        fontSize: screenSize.width * 0.03,
                       ),
-                    )
+                    ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: screenSize.height * 0.02),
                 Text(
                   "이세민 외 5명",
                   style: TextStyle(
-                    color: Color(
-                      0xff757575,
-                    ),
+                    color: const Color(0xff757575),
+                    fontSize: screenSize.width * 0.03,
                   ),
                 ),
               ],
@@ -81,89 +75,81 @@ class FullPage extends StatelessWidget {
           Positioned(
             top: topPosition,
             left: leftPosition,
-            child: SizedBox(
+            child: Container(
               width: boxSize,
               height: boxSize,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  color: Color(0xFFFFF7E3),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'image/project.svg',
-                    color: const Color(0xffFF9900),
-                    width: boxSize * 0.65,
-                    height: boxSize * 0.65,
-                  ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(screenSize.width * 0.025),
+                color: const Color(0xFFFFF7E3),
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  'image/project.svg',
+                  color: const Color(0xffFF9900),
+                  width: boxSize * 0.65,
+                  height: boxSize * 0.65,
                 ),
               ),
             ),
           ),
           Positioned(
-            top: 230,
-            left: 30,
+            top: screenSize.height * 0.3,
+            left: screenSize.width * 0.07,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "인원 모집",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: screenSize.width * 0.045,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: screenSize.height * 0.01),
                 Container(
-                  width: 240,
-                  height: 160,
+                  width: screenSize.width * 0.65,
+                  padding: EdgeInsets.all(screenSize.width * 0.04),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFFFFF),
-                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.circular(screenSize.width * 0.03),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 0.5,
-                        blurRadius: 2,
-                        offset: const Offset(0, 3),
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: screenSize.width * 0.005,
+                        blurRadius: screenSize.width * 0.02,
+                        offset: Offset(0, screenSize.height * 0.01),
                       ),
                     ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 10),
-                      _buildRow("모집 분야", "FrontEnd"),
-                      const SizedBox(height: 10),
-                      _buildRow("모집 인원", "2인"),
-                      const SizedBox(height: 10),
-                      _buildRow("지원 자격", ""),
+                      SizedBox(height: screenSize.height * 0.015),
+                      _buildRow("모집 분야", "FrontEnd", screenSize),
+                      SizedBox(height: screenSize.height * 0.015),
+                      _buildRow("모집 인원", "2인", screenSize),
+                      SizedBox(height: screenSize.height * 0.015),
+                      _buildRow("지원 자격", "", screenSize),
+                      SizedBox(height: screenSize.height * 0.01),
                       Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 20),
-                            child: _buildCustomRow(
-                              svgPath: 'image/javaScript.svg',
-                              textColor: const Color(0xffF7DF1E),
-                              backgroundColor:
-                                  const Color(0xffF7DF1E).withOpacity(0.1),
-                              textValue: "JavaScript",
-                            ),
+                          _buildCustomRow(
+                            svgPath: 'image/javaScript.svg',
+                            textColor: const Color(0xffF7DF1E),
+                            backgroundColor:
+                                const Color(0xffF7DF1E).withOpacity(0.1),
+                            textValue: "JavaScript",
+                            screenSize: screenSize,
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: _buildCustomRow(
-                              svgPath: 'image/react.svg',
-                              textColor: const Color(0xff00D8FF),
-                              backgroundColor:
-                                  const Color(0xff00D8FF).withOpacity(0.1),
-                              textValue: "React",
-                            ),
+                          SizedBox(width: screenSize.width * 0.05),
+                          _buildCustomRow(
+                            svgPath: 'image/react.svg',
+                            textColor: const Color(0xff00D8FF),
+                            backgroundColor:
+                                const Color(0xff00D8FF).withOpacity(0.1),
+                            textValue: "React",
+                            screenSize: screenSize,
                           ),
                         ],
                       ),
@@ -173,51 +159,54 @@ class FullPage extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
-            top: 480,
-            left: 30,
+          Positioned(
+            top: screenSize.height * 0.6,
+            left: screenSize.width * 0.07,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "프로젝트 소개",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: screenSize.width * 0.045,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: screenSize.height * 0.015),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenSize.width * 0.025),
                   child: SizedBox(
-                    width: 300,
+                    width: screenSize.width * 0.8,
                     child: Text(
                       "예시로 쓰는 프로젝트 소개입니다. 플러터 이 새기 말은 진짜 더럽게 안 듣는데 바라는건 또 더럽게 많아서 뭐 하나 하려고 하면 에러 3개씩 띄우니까 진짜 그냥 하기가 싫어버리지만 그래도 열심히 해야하지 않겠습니까? 냠냠굿 키보드로 무언갈 계속 쳤다간 선생님에게 디스코드 하는걸로 오해받을것 같으니 여기서 그만하겠습니다.",
+                      style: TextStyle(fontSize: screenSize.width * 0.035),
                       softWrap: true,
                     ),
                   ),
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildRow(String label, String value) {
+  Widget _buildRow(String label, String value, Size screenSize) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.05),
       child: Row(
         children: [
-          Text(label),
-          const SizedBox(width: 10),
+          Text(label, style: TextStyle(fontSize: screenSize.width * 0.04)),
+          SizedBox(width: screenSize.width * 0.02),
           if (value.isNotEmpty)
             Text(
               value,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: screenSize.width * 0.04,
+                fontWeight: FontWeight.w600,
+              ),
             ),
         ],
       ),
@@ -230,25 +219,30 @@ Widget _buildCustomRow({
   required Color textColor,
   required Color backgroundColor,
   required String textValue,
+  required Size screenSize,
 }) {
   return Container(
-    padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+    padding: EdgeInsets.symmetric(
+      vertical: screenSize.width * 0.01,
+      horizontal: screenSize.width * 0.02,
+    ),
     decoration: BoxDecoration(
       color: backgroundColor,
-      borderRadius: BorderRadius.circular(7),
+      borderRadius: BorderRadius.circular(screenSize.width * 0.02),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         SvgPicture.asset(
           svgPath,
-          width: 12,
-          height: 12,
+          width: screenSize.width * 0.03,
+          height: screenSize.width * 0.03,
         ),
-        const SizedBox(width: 3),
+        SizedBox(width: screenSize.width * 0.01),
         Text(
           textValue,
-          style: TextStyle(color: textColor, fontSize: 10),
+          style:
+              TextStyle(color: textColor, fontSize: screenSize.width * 0.025),
         ),
       ],
     ),
