@@ -124,7 +124,7 @@ class FullPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey.withOpacity(0.4),
                         spreadRadius: 0.5,
                         blurRadius: 2,
                         offset: const Offset(0, 3),
@@ -177,6 +177,7 @@ class FullPage extends StatelessWidget {
             top: 480,
             left: 30,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "프로젝트 소개",
@@ -186,15 +187,18 @@ class FullPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "프로젝트 소개",
-                    softWrap: true,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    width: 300,
+                    child: Text(
+                      "예시로 쓰는 프로젝트 소개입니다. 플러터 이 새기 말은 진짜 더럽게 안 듣는데 바라는건 또 더럽게 많아서 뭐 하나 하려고 하면 에러 3개씩 띄우니까 진짜 그냥 하기가 싫어버리지만 그래도 열심히 해야하지 않겠습니까? 냠냠굿 키보드로 무언갈 계속 쳤다간 선생님에게 디스코드 하는걸로 오해받을것 같으니 여기서 그만하겠습니다.",
+                      softWrap: true,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           )
