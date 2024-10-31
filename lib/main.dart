@@ -123,25 +123,23 @@ class _FootNavigatorState extends State<FootNavigator> {
             .setCurrentPage(index);
       },
       selectedIndex: selectedIndex,
-      // 배경 색상 없애기
-      indicatorColor: Colors.transparent, // 선택된 아이콘의 배경 색상을 없앰
+      indicatorColor: Colors.transparent,
     );
   }
 
   Widget _buildAnimatedIcon(
       String assetPath, bool isSelected, double baseSize, double scaleFactor) {
-    double iconSize =
-        isSelected ? baseSize * scaleFactor : baseSize; // 선택 시 크기를 비율에 따라 조정
+    double iconSize = isSelected ? baseSize * scaleFactor : baseSize;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      width: iconSize, // 아이콘 크기 설정
-      height: iconSize, // 아이콘 높이 설정
+      width: iconSize,
+      height: iconSize,
       child: SvgPicture.asset(
         assetPath,
-        width: iconSize, // 아이콘 크기 설정
-        height: iconSize, // 아이콘 높이 설정
+        width: iconSize,
+        height: iconSize,
       ),
     );
   }
