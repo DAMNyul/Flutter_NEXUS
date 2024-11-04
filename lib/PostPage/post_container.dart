@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/PostPage/post_full_page.dart';
 
 class PostContainer extends StatelessWidget {
   const PostContainer({super.key});
@@ -67,44 +68,42 @@ class PartyOfPostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
-        SizedBox(height: 30),
-        PostContainer(),
+        Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PostFullPage()),
+                );
+              },
+              child: const PostContainer(),
+            ),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PostFullPage()),
+                );
+              },
+              child: const PostContainer(),
+            ),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PostFullPage()),
+                );
+              },
+              child: const PostContainer(),
+            ),
+            const SizedBox(height: 30),
+          ],
+        ),
       ],
     );
   }

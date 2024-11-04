@@ -1,15 +1,25 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nexus/PostPage/post_container.dart';
-import 'package:flutter_nexus/PostPage/post_full_page.dart';
 
-class PostPage extends StatelessWidget {
-  const PostPage({super.key});
+class PostFullPage extends StatelessWidget {
+  const PostFullPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Text(
+              'Nexus',
+              style: theme.textTheme.titleMedium,
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Positioned(
@@ -39,19 +49,6 @@ class PostPage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          ListView(
-            scrollDirection: Axis.vertical,
-            children: const [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-              ),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-            ],
           ),
         ],
       ),
