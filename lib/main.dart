@@ -80,46 +80,41 @@ class FootNavigator extends StatefulWidget {
 class _FootNavigatorState extends State<FootNavigator> {
   @override
   Widget build(BuildContext context) {
-    // final ThemeData theme = Theme.of(context);
+    final int selectedIndex =
+        Provider.of<CurrentPageProvider>(context).currentPage;
+    const double homeAndOtherBaseSize = 25; // 다른 아이콘의 기본 크기
+    const double profileBaseSize = 50; // 프로필 아이콘의 기본 크기
+    const double scaleFactor = 1.2; // 선택된 아이콘 크기 비율
+
     return NavigationBar(
       backgroundColor: Colors.white,
       destinations: [
         NavigationDestination(
-          selectedIcon: SvgPicture.asset(
-            'image/clicked_home.svg',
-          ),
-          icon: SvgPicture.asset(
-            'image/home.svg',
-          ),
+          selectedIcon: _buildAnimatedIcon('image/clicked_home.svg',
+              selectedIndex == 0, homeAndOtherBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/home.svg', selectedIndex == 0,
+              homeAndOtherBaseSize, scaleFactor),
           label: '',
         ),
         NavigationDestination(
-          selectedIcon: SvgPicture.asset(
-            'image/clicked_project.svg',
-          ),
-          icon: SvgPicture.asset(
-            'image/project.svg',
-          ),
+          selectedIcon: _buildAnimatedIcon('image/clicked_project.svg',
+              selectedIndex == 1, homeAndOtherBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/project.svg', selectedIndex == 1,
+              homeAndOtherBaseSize, scaleFactor),
           label: '',
         ),
         NavigationDestination(
-          selectedIcon: SvgPicture.asset(
-            'image/clicked_chat.svg',
-          ),
-          icon: SvgPicture.asset(
-            'image/chat.svg',
-          ),
+          selectedIcon: _buildAnimatedIcon('image/clicked_chat.svg',
+              selectedIndex == 2, homeAndOtherBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/chat.svg', selectedIndex == 2,
+              homeAndOtherBaseSize, scaleFactor),
           label: '',
         ),
         NavigationDestination(
-          selectedIcon: SvgPicture.asset(
-            'image/clicked_profile.svg',
-            width: 45,
-          ),
-          icon: SvgPicture.asset(
-            'image/profile.svg',
-            width: 45,
-          ),
+          selectedIcon: _buildAnimatedIcon('image/clicked_profile.svg',
+              selectedIndex == 3, profileBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/profile.svg', selectedIndex == 3,
+              profileBaseSize, scaleFactor),
           label: '',
         ),
       ],
@@ -127,7 +122,25 @@ class _FootNavigatorState extends State<FootNavigator> {
         Provider.of<CurrentPageProvider>(context, listen: false)
             .setCurrentPage(index);
       },
-      selectedIndex: Provider.of<CurrentPageProvider>(context).currentPage,
+      selectedIndex: selectedIndex,
+      indicatorColor: Colors.transparent,
+    );
+  }
+
+  Widget _buildAnimatedIcon(
+      String assetPath, bool isSelected, double baseSize, double scaleFactor) {
+    double iconSize = isSelected ? baseSize * scaleFactor : baseSize;
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      width: iconSize,
+      height: iconSize,
+      child: SvgPicture.asset(
+        assetPath,
+        width: iconSize,
+        height: iconSize,
+      ),
     );
   }
 }
