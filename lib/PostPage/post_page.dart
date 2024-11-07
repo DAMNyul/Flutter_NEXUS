@@ -1,7 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nexus/PostPage/post_container.dart';
-import 'package:flutter_nexus/PostPage/post_full_page.dart';
 
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
