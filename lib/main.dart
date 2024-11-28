@@ -22,6 +22,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // 예시 데이터
+  final List<Map<String, String>> posts = [
+    {"title": "제목 1", "content": "내용 1"},
+    {"title": "제목 2", "content": "내용 2"},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,10 +35,11 @@ class _MyAppState extends State<MyApp> {
         appBar: const Header(),
         body: Consumer<CurrentPageProvider>(
           builder: (context, currentPageProvider, child) {
+            // PostPage를 띄울 때 posts를 전달해줍니다.
             return [
               const MainPage(),
               const ProjectPage(),
-              const PostPage(),
+              PostPage(posts: posts), // PostPage에 posts 전달
               const ProfilePage(),
             ][currentPageProvider.currentPage];
           },

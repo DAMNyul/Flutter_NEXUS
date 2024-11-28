@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nexus/PostPage/post_container.dart';
-import 'create_post_page.dart';
+import 'package:flutter_nexus/PostPage/create_post_page.dart';
 
-class PostPage extends StatelessWidget {
-  const PostPage({super.key});
+class PostPage extends StatefulWidget {
+  final List<Map<String, String>> posts;
 
+  const PostPage({super.key, required this.posts});
+
+  @override
+  _PostPageState createState() => _PostPageState();
+}
+
+class _PostPageState extends State<PostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          // 배경 원들
           Positioned(
             top: MediaQuery.of(context).size.height * 0.05,
             left: MediaQuery.of(context).size.width * -0.3,
@@ -39,19 +47,8 @@ class PostPage extends StatelessWidget {
               ),
             ),
           ),
-          ListView(
-            scrollDirection: Axis.vertical,
-            children: const [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-              ),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-              PartyOfPostContainer(),
-            ],
-          ),
+          // PartyOfPostContainer로 포스트 리스트 전달
+          PartyOfPostContainer(posts: widget.posts),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -59,12 +56,18 @@ class PostPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CreatePostPage(),
+              builder: (context) => CreatePostPage(),
             ),
-          );
+          ).then((newPost) {
+            if (newPost != null) {
+              setState(() {
+                widget.posts.add(newPost);
+              });
+            }
+          });
         },
-        backgroundColor: Color(0xffDAE9FF), // 버튼 배경색
-        child: const Icon(Icons.add, color: Colors.white), // 버튼 아이콘
+        backgroundColor: const Color(0xffDAE9FF),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
