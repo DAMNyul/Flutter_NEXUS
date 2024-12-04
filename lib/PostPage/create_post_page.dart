@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'post_container.dart'; // PartyOfPostContainer와 관련된 코드 임포트
+import 'post_container.dart'; // PartyOfPostContainer 관련 코드 임포트
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -12,7 +12,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
 
-  List<Map<String, String>> posts = [];
+  List<Map<String, String>> posts = []; // 포스트 데이터 저장
 
   void _uploadPost() {
     String title = titleController.text;
@@ -29,7 +29,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
       posts.add({'title': title, 'content': content});
     });
 
-    // 포스트 업로드 후 PartyOfPostContainer로 이동
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -37,7 +36,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
       ),
     );
 
-    // 입력 필드 비우기
     titleController.clear();
     contentController.clear();
 
@@ -62,6 +60,32 @@ class _CreatePostPageState extends State<CreatePostPage> {
       body: SafeArea(
         child: Stack(
           children: [
+            // 배경 원들
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.05,
+              left: MediaQuery.of(context).size.width * -0.3,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.width * 0.7,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFF7E3),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.05,
+              right: MediaQuery.of(context).size.width * -0.3,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.width * 0.7,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFF7E3),
+                ),
+              ),
+            ),
+            // 메인 컨테이너와 입력 필드
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -81,23 +105,44 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('제목',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text(
+                        '제목',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       TextField(
-                          controller: titleController,
-                          decoration: InputDecoration(hintText: '제목 작성')),
+                        controller: titleController,
+                        decoration: InputDecoration(
+                          hintText: '제목 작성',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 20),
-                      const Text('내용',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text(
+                        '내용',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       TextField(
-                          controller: contentController,
-                          maxLines: 4,
-                          decoration: InputDecoration(hintText: '내용 작성')),
+                        controller: contentController,
+                        maxLines: 4,
+                        decoration: InputDecoration(
+                          hintText: '내용 작성',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: _uploadPost,
