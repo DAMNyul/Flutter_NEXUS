@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nexus/PostPage/post_container.dart';
 import 'package:flutter_nexus/PostPage/create_post_page.dart';
+import 'package:flutter_nexus/PostPage/post_container.dart';
 
-class PostPage extends StatefulWidget {
+class PostPage extends StatelessWidget {
   final List<Map<String, String>> posts;
 
+  // posts를 필수로 받는 생성자
   const PostPage({super.key, required this.posts});
 
-  @override
-  _PostPageState createState() => _PostPageState();
-}
-
-class _PostPageState extends State<PostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,27 +24,13 @@ class _PostPageState extends State<PostPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0XFFFFF7E3),
+                  color: Color(0xFFFFF7E3),
                 ),
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.4,
-            right: MediaQuery.of(context).size.width * -0.3,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              height: MediaQuery.of(context).size.width * 0.7,
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0xffFFF7E3),
-                ),
-              ),
-            ),
-          ),
-          // PartyOfPostContainer로 포스트 리스트 전달
-          PartyOfPostContainer(posts: widget.posts),
+          // 포스트 리스트 표시
+          PartyOfPostContainer(posts: posts),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -56,17 +38,11 @@ class _PostPageState extends State<PostPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreatePostPage(),
+              builder: (context) => const CreatePostPage(),
             ),
-          ).then((newPost) {
-            if (newPost != null) {
-              setState(() {
-                widget.posts.add(newPost);
-              });
-            }
-          });
+          );
         },
-        backgroundColor: const Color(0xffDAE9FF),
+        backgroundColor: const Color(0xFFDAE9FF),
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );

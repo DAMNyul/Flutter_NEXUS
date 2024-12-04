@@ -21,36 +21,26 @@ class PostContainer extends StatelessWidget {
             ),
           ],
         ),
-        width: MediaQuery.of(context).size.width * 0.75, // 넓이 조정
-        height: MediaQuery.of(context).size.height * 0.1,
+        width: MediaQuery.of(context).size.width * 0.75,
+        margin: const EdgeInsets.symmetric(vertical: 10), // 여백 추가
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5),
-                  ),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(height: 3),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 content,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 10),
+                style: const TextStyle(fontSize: 14),
               ),
             ),
           ],
@@ -67,18 +57,12 @@ class PartyOfPostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.all(10),
       children: posts.map((post) {
-        return GestureDetector(
-          onTap: () {
-            // 포스트 클릭 시
-            // 여기서 별도의 페이지로 이동하는 로직을 넣지 않고,
-            // 포스트를 현재 화면에서 표시하는 방식으로
-          },
-          child: PostContainer(
-            title: post['title']!,
-            content: post['content']!,
-          ),
+        return PostContainer(
+          title: post['title']!,
+          content: post['content']!,
         );
       }).toList(),
     );
