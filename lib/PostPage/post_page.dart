@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'create_post_page.dart'; // CreatePostPage 관련 코드 임포트
-import 'post_container.dart'; // PartyOfPostContainer 관련 코드 임포트
+// PartyOfPostContainer 관련 코드 임포트
 import 'post_detail_page.dart';
 
 // PostPage에서 새로 생성된 포스트를 받는 부분 수정
