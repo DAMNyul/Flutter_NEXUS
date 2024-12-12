@@ -8,10 +8,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => CurrentPageProvider(),
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CurrentPageProvider()),
+        ChangeNotifierProvider(create: (context) => PostProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -22,12 +27,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // 예시 데이터
-  final List<Map<String, String>> posts = [
-    {"title": "제목 1", "content": "내용 1"},
-    {"title": "제목 2", "content": "내용 2"},
-  ];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,11 +34,10 @@ class _MyAppState extends State<MyApp> {
         appBar: const Header(),
         body: Consumer<CurrentPageProvider>(
           builder: (context, currentPageProvider, child) {
-            // PostPage를 띄울 때 posts를 전달해줍니다.
             return [
               const MainPage(),
               const ProjectPage(),
-              PostPage(posts: posts), // PostPage에 posts 전달
+              PostPage(), // PostPage에서 PostProvider를 사용
               const ProfilePage(),
             ][currentPageProvider.currentPage];
           },
@@ -57,7 +55,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFFFFFFF),
       title: Row(
         children: [
           IconButton(
