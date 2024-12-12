@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// PostDetailPage에서 안전한 null 처리
 class PostDetailPage extends StatelessWidget {
   final String title;
   final String content;
@@ -28,7 +29,7 @@ class PostDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              title.isNotEmpty ? title : '제목 없음', // null 체크 및 기본값 처리
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -36,7 +37,7 @@ class PostDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              content,
+              content.isNotEmpty ? content : '내용 없음', // null 체크 및 기본값 처리
               style: const TextStyle(fontSize: 16),
             ),
           ],

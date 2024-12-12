@@ -37,7 +37,9 @@ class _MyAppState extends State<MyApp> {
             return [
               const MainPage(),
               const ProjectPage(),
-              PostPage(), // PostPage에서 PostProvider를 사용
+              PostPage(
+                  currentUserId:
+                      'current_user_id'), // PostPage에서 PostProvider를 사용
               const ProfilePage(),
             ][currentPageProvider.currentPage];
           },
