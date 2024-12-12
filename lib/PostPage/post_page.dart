@@ -1,4 +1,3 @@
-// PostPage/post_page.dart
 import 'package:flutter/material.dart';
 import 'create_post_page.dart'; // CreatePostPage 관련 코드 임포트
 import 'post_container.dart'; // PartyOfPostContainer 관련 코드 임포트
@@ -18,23 +17,53 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white, // 배경색 하얀색 고정
         title: const Text(
           'Posts',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        elevation: 0,
+        elevation: 0, // 그림자 제거
       ),
       body: SafeArea(
-        child: widget.posts.isEmpty
-            ? const Center(
-                child: Text(
-                  'No posts yet.',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+        child: Stack(
+          children: [
+            // 배경 원들
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.05,
+              left: MediaQuery.of(context).size.width * -0.3,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.width * 0.7,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFF7E3),
                 ),
-              )
-            : PartyOfPostContainer(posts: widget.posts),
+              ),
+            ),
+            Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.05,
+              right: MediaQuery.of(context).size.width * -0.3,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.width * 0.7,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFFFFF7E3),
+                ),
+              ),
+            ),
+            // 메인 컨텐츠
+            widget.posts.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No posts yet.',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                  )
+                : PartyOfPostContainer(posts: widget.posts),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -59,5 +88,3 @@ class _PostPageState extends State<PostPage> {
     );
   }
 }
-
-// PostPage/create_post_page.dart
