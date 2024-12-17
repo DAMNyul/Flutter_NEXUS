@@ -8,7 +8,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  @override
   final TextEditingController _textController = TextEditingController();
   String userInput = ""; // 사용자의 입력을 저장할 변수
 

@@ -9,7 +9,6 @@ class ProfilePage2 extends StatefulWidget {
 }
 
 class _ProfilePage2State extends State<ProfilePage2> {
-  @override
   bool isFollowed = false;
 
   void clickFollowButton() {
