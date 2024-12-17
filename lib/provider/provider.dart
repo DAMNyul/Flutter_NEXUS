@@ -31,9 +31,15 @@ class PostProvider extends ChangeNotifier {
     }
   }
 
-  void addPost(result, result2, String currentUserId) {}
+  void addPost(result, result2, String currentUserId) {
+    // 게시물 추가 로직 (추후 구현)
+  }
 }
 
 extension on List<Post> {
-  List<Post> sorted(Function(dynamic a, dynamic b) param0) {}
+  List<Post> sorted(int Function(Post a, Post b) compare) {
+    final List<Post> sortedList = List<Post>.from(this);
+    sortedList.sort(compare);
+    return sortedList;
+  }
 }
