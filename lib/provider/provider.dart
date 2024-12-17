@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/models/post_models.dart';
 
 class CurrentPageProvider with ChangeNotifier {
   int _currentPage = 0;
@@ -11,15 +12,28 @@ class CurrentPageProvider with ChangeNotifier {
 }
 
 class PostProvider extends ChangeNotifier {
-  final List<Map<String, String>> _posts = [
-    {"title": "제목 1", "content": "내용 1"},
-    {"title": "제목 2", "content": "내용 2"},
-  ];
+  final List<Post> _posts = [];
 
-  List<Map<String, String>> get posts => _posts;
-
-  void addPost(String title, String content) {
-    _posts.add({"title": title, "content": content});
-    notifyListeners(); // 상태 변경 알림
+  List<Post> get posts {
+    // 좋아요 수 내림차순, 같을 경우 최신 순으로 정렬
+    return _posts.sorted((a, b) {
+      int likeComparison = b.likeCount.compareTo(a.likeCount);
+      if (likeComparison != 0) return likeComparison;
+      return b.createdAt.compareTo(a.createdAt);
+    });
   }
+
+  void togglePostLike(String postId, String currentUserId) {
+    final postIndex = _posts.indexWhere((post) => post.id == postId);
+    if (postIndex != -1) {
+      _posts[postIndex].toggleLike(currentUserId);
+      notifyListeners();
+    }
+  }
+
+  void addPost(result, result2, String currentUserId) {}
+}
+
+extension on List<Post> {
+  List<Post> sorted(Function(dynamic a, dynamic b) param0) {}
 }
