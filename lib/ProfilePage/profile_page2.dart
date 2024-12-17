@@ -10,10 +10,17 @@ class ProfilePage2 extends StatefulWidget {
 
 class _ProfilePage2State extends State<ProfilePage2> {
   bool isFollowed = false;
+  int Follower = 0;
+  int Following = 0;
 
   void clickFollowButton() {
     setState(() {
       isFollowed = !isFollowed;
+      if (isFollowed == true) {
+        Follower++;
+      } else {
+        Follower--;
+      }
     });
   }
 
@@ -23,8 +30,23 @@ class _ProfilePage2State extends State<ProfilePage2> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    String FollowerCount = Follower.toString();
+    String FollowingCount = Following.toString();
+
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Text(
+              'Nexus',
+              style: theme.textTheme.titleMedium,
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Transform.translate(
@@ -94,7 +116,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                             decoration: const BoxDecoration(
                               color: Color(0xfff4f9ff),
                             ),
-                            child: const Column(
+                            child: Column(
                               children: [
                                 Text(
                                   "Follower",
@@ -105,12 +127,12 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                   ),
                                 ),
                                 Text(
-                                  "0",
+                                  FollowerCount,
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -121,7 +143,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                             decoration: const BoxDecoration(
                               color: Color(0xfff4f9ff),
                             ),
-                            child: const Column(
+                            child: Column(
                               children: [
                                 Text(
                                   "Following",
@@ -132,7 +154,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                   ),
                                 ),
                                 Text(
-                                  "0",
+                                  FollowingCount,
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
