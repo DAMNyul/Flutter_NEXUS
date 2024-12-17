@@ -49,7 +49,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                       child: Column(
                         children: [
                           const Text(
-                            "Username",
+                            "Username1",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
@@ -106,7 +106,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                   ),
                                 ),
                                 Text(
-                                  "1",
+                                  "0",
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
@@ -133,7 +133,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                   ),
                                 ),
                                 Text(
-                                  "10000",
+                                  "0",
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
