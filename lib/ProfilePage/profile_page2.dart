@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfilePage2 extends StatefulWidget {
+  const ProfilePage2({super.key});
+
+  @override
+  State<ProfilePage2> createState() => _ProfilePage2State();
+}
+
+class _ProfilePage2State extends State<ProfilePage2> {
+  @override
+  bool isFollowed = false;
+
+  void clickFollowButton() {
+    setState(() {
+      isFollowed = !isFollowed;
+    });
+  }
+
+  void clickMessageButton() {
+    print("버튼 클릭");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +44,44 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      child: Column(
                         children: [
                           const Text(
                             "Username",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            height: MediaQuery.of(context).size.height * 0.08,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.27,
+                                  child: ElevatedButton(
+                                    onPressed: clickFollowButton,
+                                    child: Text(
+                                        isFollowed ? "Following" : "Follow"),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.01,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.27,
+                                  child: ElevatedButton(
+                                    onPressed: clickMessageButton,
+                                    child: Text("Message"),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -61,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "0",
+                                  "1",
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
@@ -88,7 +133,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "0",
+                                  "10000",
                                   style: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
