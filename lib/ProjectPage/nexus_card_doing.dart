@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/ProjectPage/full_page_doing.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'full_page.dart';
+import 'full_page_collecting.dart';
 
-class NexusCard extends StatelessWidget {
+class NexusCardDoing extends StatelessWidget {
   //카드 정보 db 로 받아서 저장
-  const NexusCard({super.key});
+  const NexusCardDoing({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class NexusCard extends StatelessWidget {
               Icon(
                 Icons.circle,
                 size: cardWidth * 0.06,
-                color: Colors.green,
+                color: Color(0xFF00DA71),
               ),
               const SizedBox(width: 5),
               Text(
@@ -94,9 +95,9 @@ class NexusCard extends StatelessWidget {
   }
 }
 
-class TwoOfNexusCard extends StatelessWidget {
+class TwoOfNexusCardDoing extends StatelessWidget {
   //db 정보를 받아서 카드 로딩
-  const TwoOfNexusCard({super.key});
+  const TwoOfNexusCardDoing({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +109,11 @@ class TwoOfNexusCard extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FullPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const FullPageDoing()),
                 );
               },
-              child: const NexusCard(),
+              child: const NexusCardDoing(),
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.063,
@@ -120,10 +122,11 @@ class TwoOfNexusCard extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FullPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const FullPageDoing()),
                 );
               },
-              child: const NexusCard(),
+              child: const NexusCardDoing(),
             ),
           ],
         ),

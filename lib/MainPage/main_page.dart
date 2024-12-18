@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nexus/ProjectPage/nexus_card.dart';
+import 'package:flutter_nexus/ProjectPage/full_page_collecting.dart';
+import 'package:flutter_nexus/ProjectPage/full_page_doing.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_collecting.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_doing.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -157,7 +160,7 @@ class _MainPageState extends State<MainPage> {
                   width: 200,
                   height: 300,
                 ),
-                const Column(
+                Column(
                   children: [
                     Row(
                       children: [
@@ -184,16 +187,50 @@ class _MainPageState extends State<MainPage> {
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                           ),
-                          NexusCard(),
-                          SizedBox(width: 10),
-                          NexusCard(),
-                          SizedBox(width: 10),
-                          NexusCard(),
-                          SizedBox(width: 10),
-                          NexusCard(),
-                          SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FullPageCollecting()),
+                              );
+                            },
+                            child: NexusCardCollecting(),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.063,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FullPageDoing()),
+                              );
+                            },
+                            child: const NexusCardDoing(),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.063,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FullPageCollecting()),
+                              );
+                            },
+                            child: const NexusCardCollecting(),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.063,
+                          )
                         ],
                       ),
                     ),
