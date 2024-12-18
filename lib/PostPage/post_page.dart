@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_nexus/models/post_models.dart';
 import '../provider/provider.dart';
 import 'create_post_page.dart';
 import 'post_container.dart';

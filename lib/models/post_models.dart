@@ -1,6 +1,3 @@
-// lib/models/post_model.dart
-import 'package:flutter/foundation.dart';
-
 class Post {
   String id;
   String title;
