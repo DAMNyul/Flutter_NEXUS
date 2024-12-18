@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/ProfilePage/profile_page2.dart';
 import 'package:flutter_nexus/ProjectPage/full_page_collecting.dart';
 import 'package:flutter_nexus/ProjectPage/full_page_doing.dart';
 import 'package:flutter_nexus/ProjectPage/nexus_card_collecting.dart';
@@ -18,7 +19,14 @@ class _MainPageState extends State<MainPage> {
   void _saveInputValue() {
     // 입력 값을 처리하는 로직
     String inputValue = _textController.text;
-    print(inputValue); // 예: 입력값을 출력
+    if (inputValue == "username1") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfilePage2(),
+        ),
+      );
+    }
     // 여기서 원하는 로직을 추가할 수 있습니다.
   }
 

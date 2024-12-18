@@ -3,7 +3,6 @@ import 'package:flutter_nexus/MainPage/main_page.dart';
 import 'package:flutter_nexus/PostPage/post_page.dart';
 import 'package:flutter_nexus/ProfilePage/profile_page.dart';
 import 'package:flutter_nexus/ProjectPage/project_page.dart';
-import 'package:flutter_nexus/SearchPage/search_page.dart';
 import 'package:flutter_nexus/provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +38,6 @@ class _MyAppState extends State<MyApp> {
             // PostPage를 띄울 때 posts를 전달해줍니다.
             return [
               const MainPage(),
-              const SearchPage(),
               const ProjectPage(),
               PostPage(posts: posts), // PostPage에 posts 전달
               const ProfilePage(),
@@ -106,30 +104,23 @@ class _FootNavigatorState extends State<FootNavigator> {
           label: '',
         ),
         NavigationDestination(
-          selectedIcon: _buildAnimatedIcon('image/clicked_search.svg',
-              selectedIndex == 1, homeAndOtherBaseSize, scaleFactor),
-          icon: _buildAnimatedIcon('image/search.svg', selectedIndex == 1,
-              homeAndOtherBaseSize, scaleFactor),
-          label: '',
-        ),
-        NavigationDestination(
           selectedIcon: _buildAnimatedIcon('image/clicked_project.svg',
-              selectedIndex == 2, homeAndOtherBaseSize, scaleFactor),
-          icon: _buildAnimatedIcon('image/project.svg', selectedIndex == 2,
+              selectedIndex == 1, homeAndOtherBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/project.svg', selectedIndex == 1,
               homeAndOtherBaseSize, scaleFactor),
           label: '',
         ),
         NavigationDestination(
           selectedIcon: _buildAnimatedIcon('image/clicked_chat.svg',
-              selectedIndex == 3, homeAndOtherBaseSize, scaleFactor),
-          icon: _buildAnimatedIcon('image/chat.svg', selectedIndex == 3,
+              selectedIndex == 2, homeAndOtherBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/chat.svg', selectedIndex == 2,
               homeAndOtherBaseSize, scaleFactor),
           label: '',
         ),
         NavigationDestination(
           selectedIcon: _buildAnimatedIcon('image/clicked_profile.svg',
-              selectedIndex == 4, profileBaseSize, scaleFactor),
-          icon: _buildAnimatedIcon('image/profile.svg', selectedIndex == 4,
+              selectedIndex == 3, profileBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/profile.svg', selectedIndex == 3,
               profileBaseSize, scaleFactor),
           label: '',
         ),
