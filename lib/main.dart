@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/ChatPage/chat_page.dart';
 import 'package:flutter_nexus/MainPage/main_page.dart';
 import 'package:flutter_nexus/PostPage/post_page.dart';
 import 'package:flutter_nexus/ProfilePage/profile_page.dart';
@@ -59,14 +60,28 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.menu),
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.menu),
+              ),
+              Text(
+                'Nexus',
+                style: theme.textTheme.titleMedium,
+              ),
+            ],
           ),
-          Text(
-            'Nexus',
-            style: theme.textTheme.titleMedium,
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ChatPage()));
+            },
+            icon: Icon(
+              Icons.chat,
+            ),
           ),
         ],
       ),
@@ -111,9 +126,9 @@ class _FootNavigatorState extends State<FootNavigator> {
           label: '',
         ),
         NavigationDestination(
-          selectedIcon: _buildAnimatedIcon('image/clicked_chat.svg',
+          selectedIcon: _buildAnimatedIcon('image/clicked_post.svg',
               selectedIndex == 2, homeAndOtherBaseSize, scaleFactor),
-          icon: _buildAnimatedIcon('image/chat.svg', selectedIndex == 2,
+          icon: _buildAnimatedIcon('image/post.svg', selectedIndex == 2,
               homeAndOtherBaseSize, scaleFactor),
           label: '',
         ),
