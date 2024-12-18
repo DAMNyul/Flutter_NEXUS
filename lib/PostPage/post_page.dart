@@ -27,7 +27,7 @@ class PostPage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // 배경 원들
+            // 배경 반원
             Positioned(
               top: MediaQuery.of(context).size.height * 0.05,
               left: MediaQuery.of(context).size.width * -0.3,
@@ -52,7 +52,7 @@ class PostPage extends StatelessWidget {
                 ),
               ),
             ),
-            // 메인 컨테이너와 포스트 리스트
+            // 포스트 리스트
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: postProvider.posts.isEmpty
@@ -84,7 +84,7 @@ class PostPage extends StatelessWidget {
                 .addPost(result['title'], result['content'], currentUserId);
           }
         },
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add, color: Colors.black),
       ),
     );
   }

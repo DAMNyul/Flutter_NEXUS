@@ -31,8 +31,16 @@ class PostProvider extends ChangeNotifier {
     }
   }
 
-  void addPost(result, result2, String currentUserId) {
-    // 게시물 추가 로직 (추후 구현)
+  void addPost(String title, String content, String currentUserId) {
+    final newPost = Post(
+      id: DateTime.now().toIso8601String(), // 고유 ID 생성
+      title: title,
+      content: content,
+      userId: currentUserId,
+    );
+
+    _posts.add(newPost);
+    notifyListeners(); // 변경 사항 알림
   }
 }
 
