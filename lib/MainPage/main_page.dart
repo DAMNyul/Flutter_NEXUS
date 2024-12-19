@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nexus/ProjectPage/nexus_card.dart';
+import 'package:flutter_nexus/ProfilePage/profile_page2.dart';
+import 'package:flutter_nexus/ProjectPage/full_page_collecting.dart';
+import 'package:flutter_nexus/ProjectPage/full_page_doing.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_collecting.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_doing.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,7 +19,14 @@ class _MainPageState extends State<MainPage> {
   void _saveInputValue() {
     // 입력 값을 처리하는 로직
     String inputValue = _textController.text;
-    print(inputValue); // 예: 입력값을 출력
+    if (inputValue == "username1") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfilePage2(),
+        ),
+      );
+    }
     // 여기서 원하는 로직을 추가할 수 있습니다.
   }
 
@@ -157,7 +168,7 @@ class _MainPageState extends State<MainPage> {
                   width: 200,
                   height: 300,
                 ),
-                const Column(
+                Column(
                   children: [
                     Row(
                       children: [
@@ -184,16 +195,50 @@ class _MainPageState extends State<MainPage> {
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                           ),
-                          NexusCard(),
-                          SizedBox(width: 10),
-                          NexusCard(),
-                          SizedBox(width: 10),
-                          NexusCard(),
-                          SizedBox(width: 10),
-                          NexusCard(),
-                          SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FullPageCollecting()),
+                              );
+                            },
+                            child: NexusCardCollecting(),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.063,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FullPageDoing()),
+                              );
+                            },
+                            child: const NexusCardDoing(),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.063,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FullPageCollecting()),
+                              );
+                            },
+                            child: const NexusCardCollecting(),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.063,
+                          )
                         ],
                       ),
                     ),

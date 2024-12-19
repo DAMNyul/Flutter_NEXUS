@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nexus/ProjectPage/nexus_card.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_collecting.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_doing.dart';
 
 class ProjectPage extends StatelessWidget {
   const ProjectPage({super.key});
@@ -45,10 +46,10 @@ class ProjectPage extends StatelessWidget {
               children: const [
                 Column(
                   children: [
-                    TwoOfNexusCard(),
-                    TwoOfNexusCard(),
-                    TwoOfNexusCard(),
-                    TwoOfNexusCard(),
+                    TwoOfNexusCardDoing(),
+                    TwoOfNexusCardCollecting(),
+                    TwoOfNexusCardDoing(),
+                    TwoOfNexusCardCollecting(),
                   ],
                 ),
               ],
