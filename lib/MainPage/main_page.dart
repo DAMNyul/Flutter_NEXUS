@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   void _saveInputValue() {
     // 입력 값을 처리하는 로직
     String inputValue = _textController.text;
-    if (inputValue == "username1") {
+    if (inputValue == "username1" || inputValue == "Username1") {
       Navigator.push(
         context,
         MaterialPageRoute(

@@ -41,6 +41,7 @@ class _MyAppState extends State<MyApp> {
               PostPage(
                   currentUserId:
                       'current_user_id'), // PostPage에서 PostProvider를 사용
+              const ChatPage(),
               const ProfilePage(),
             ][currentPageProvider.currentPage];
           },
@@ -60,28 +61,14 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: const Color(0xFFFFFFFF),
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.menu),
-              ),
-              Text(
-                'Nexus',
-                style: theme.textTheme.titleMedium,
-              ),
-            ],
-          ),
           IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ChatPage()));
-            },
-            icon: Icon(
-              Icons.chat,
-            ),
+            onPressed: () {},
+            icon: const Icon(Icons.menu),
+          ),
+          Text(
+            'Nexus',
+            style: theme.textTheme.titleMedium,
           ),
         ],
       ),
@@ -133,9 +120,16 @@ class _FootNavigatorState extends State<FootNavigator> {
           label: '',
         ),
         NavigationDestination(
+          selectedIcon: _buildAnimatedIcon('image/clicked_chat.svg',
+              selectedIndex == 3, homeAndOtherBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/chat.svg', selectedIndex == 3,
+              homeAndOtherBaseSize, scaleFactor),
+          label: '',
+        ),
+        NavigationDestination(
           selectedIcon: _buildAnimatedIcon('image/clicked_profile.svg',
-              selectedIndex == 3, profileBaseSize, scaleFactor),
-          icon: _buildAnimatedIcon('image/profile.svg', selectedIndex == 3,
+              selectedIndex == 4, profileBaseSize, scaleFactor),
+          icon: _buildAnimatedIcon('image/profile.svg', selectedIndex == 4,
               profileBaseSize, scaleFactor),
           label: '',
         ),

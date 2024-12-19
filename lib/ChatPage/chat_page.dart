@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nexus/ChatPage/chat_full_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -16,28 +17,15 @@ class _ChatPageState extends State<ChatPage> {
     String inputValue = _textController.text;
     setState(() {
       // 입력값이 "username1"일 때만 컨테이너 표시
-      showContainer = inputValue == "username1";
+      showContainer = inputValue == "username1" || inputValue == "Username1";
     });
     _textController.clear(); // 입력 필드 초기화
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            Text(
-              'Nexus',
-              style: theme.textTheme.titleMedium,
-            ),
-          ],
-        ),
-      ),
       body: Column(
         children: [
           Row(
@@ -100,13 +88,16 @@ class _ChatPageState extends State<ChatPage> {
                       width: MediaQuery.of(context).size.width * 0.62,
                       height: MediaQuery.of(context).size.width * 0.15,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          SvgPicture.asset(
+                            "images/profile.svg",
+                            height: MediaQuery.of(context).size.height * 0.1,
+                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "username1",
+                                "Username1",
                                 style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.06,
@@ -115,7 +106,6 @@ class _ChatPageState extends State<ChatPage> {
                               ),
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios),
                         ],
                       ),
                     ),
