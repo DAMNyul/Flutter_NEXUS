@@ -19,12 +19,20 @@ class PostContainer extends StatelessWidget {
     final postProvider = Provider.of<PostProvider>(context);
     final bool isLiked = post.likedUsers.contains(currentUserId);
 
-    String truncateContent(String content) {
-      const int maxLength = 55; // 최대 글자 수
-      if (content.length > maxLength) {
-        return '${content.substring(0, maxLength)}...';
+    String formatTimeAgo(DateTime createdAt) {
+      final Duration difference = DateTime.now().difference(createdAt);
+
+      if (difference.inMinutes < 1) {
+        return '방금 전';
+      } else if (difference.inMinutes < 60) {
+        return '${difference.inMinutes}분 전';
+      } else if (difference.inHours < 24) {
+        return '${difference.inHours}시간 전';
+      } else if (difference.inDays < 7) {
+        return '${difference.inDays}일 전';
+      } else {
+        return '${(difference.inDays / 7).floor()}주 전';
       }
-      return content;
     }
 
     return Padding(
@@ -72,7 +80,7 @@ class PostContainer extends StatelessWidget {
               const SizedBox(height: 8),
               // 내용 표시 (20자 제한 적용)
               Text(
-                truncateContent(post.content),
+                _truncateContent(post.content),
                 style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black87,
@@ -80,18 +88,31 @@ class PostContainer extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      postProvider.togglePostLike(post.id, currentUserId);
-                    },
-                    child: Icon(
-                      isLiked ? Icons.favorite : Icons.favorite_border,
-                      color: isLiked ? Colors.red : Colors.grey,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          postProvider.togglePostLike(post.id, currentUserId);
+                        },
+                        child: Icon(
+                          isLiked ? Icons.favorite : Icons.favorite_border,
+                          color: isLiked ? Colors.red : Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      Text('${post.likeCount} likes'),
+                    ],
+                  ),
+                  // 작성 시간 표시
+                  Text(
+                    formatTimeAgo(post.createdAt),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  Text('${post.likeCount} likes'),
                 ],
               ),
             ],
@@ -99,6 +120,15 @@ class PostContainer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // 내용을 20자 이하로 자르고 나머지는 '...'으로 대체
+  String _truncateContent(String content) {
+    const int maxLength = 20; // 최대 글자 수
+    if (content.length > maxLength) {
+      return '${content.substring(0, maxLength)}...';
+    }
+    return content;
   }
 }
 
