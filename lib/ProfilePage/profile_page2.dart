@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nexus/ChatPage/chat_full_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePage2 extends StatefulWidget {
@@ -25,7 +26,14 @@ class _ProfilePage2State extends State<ProfilePage2> {
   }
 
   void clickMessageButton() {
-    print("버튼 클릭");
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ChatFullPage(),
+        ),
+      );
+    });
   }
 
   @override

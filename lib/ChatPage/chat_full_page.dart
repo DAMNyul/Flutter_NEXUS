@@ -14,7 +14,7 @@ class ChatFullPage extends StatelessWidget {
         title: Row(
           children: [
             Text(
-              'Nexus',
+              'username1',
               style: theme.textTheme.titleMedium,
             ),
           ],

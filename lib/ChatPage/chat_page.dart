@@ -85,13 +85,12 @@ class _ChatPageState extends State<ChatPage> {
                 height: MediaQuery.of(context).size.width * 0.175,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(25),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
+                      spreadRadius: 0,
+                      blurRadius: 0,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
