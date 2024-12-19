@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'post_container.dart'; // PartyOfPostContainer 관련 코드 임포트
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -12,8 +11,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
 
-  List<Map<String, String>> posts = []; // 포스트 데이터 저장
-
   void _uploadPost() {
     String title = titleController.text;
     String content = contentController.text;
@@ -25,17 +22,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
       return;
     }
 
-    setState(() {
-      posts.add({'title': title, 'content': content});
-    });
+    // 입력한 데이터를 생성
+    Map<String, String> newPost = {'title': title, 'content': content};
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PartyOfPostContainer(posts: posts),
-      ),
-    );
+    // 현재 화면을 닫으며 데이터 전달
+    Navigator.pop(context, newPost);
 
+    // 입력 필드 초기화
     titleController.clear();
     contentController.clear();
 
@@ -60,6 +53,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
       body: SafeArea(
         child: Stack(
           children: [
+            Positioned(
+              left: MediaQuery.of(context).size.width * 0.25,
+              child: Text("글을 작성하고 사람들과 공유해보세요"),
+            ),
             // 배경 원들
             Positioned(
               top: MediaQuery.of(context).size.height * 0.05,
@@ -119,6 +116,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         controller: titleController,
                         decoration: InputDecoration(
                           hintText: '제목 작성',
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              )),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -138,15 +140,30 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: '내용 작성',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: _uploadPost,
-                        child: const Text('포스트 업로드'),
+                      Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xffF4F9FF),
+                            foregroundColor: Colors.black,
+                            surfaceTintColor: Colors.grey,
+                          ),
+                          onPressed: _uploadPost,
+                          child: const Text(
+                            '포스트 업로드',
+                          ),
+                        ),
                       ),
                     ],
                   ),
