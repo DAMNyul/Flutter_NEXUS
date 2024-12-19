@@ -2,7 +2,7 @@ class Post {
   String id;
   String title;
   String content;
-  String userId; // 포스트 작성자 ID
+  String author; // 포스트 작성자 이름
   Set<String> likedUsers; // 좋아요 누른 사용자들의 ID
   DateTime createdAt;
 
@@ -10,7 +10,7 @@ class Post {
     required this.id,
     required this.title,
     required this.content,
-    required this.userId,
+    required this.author, // 작성자 이름 필드 추가
     Set<String>? likedUsers,
     DateTime? createdAt,
   })  : likedUsers = likedUsers ?? {},
