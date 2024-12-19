@@ -53,6 +53,10 @@ class _CreatePostPageState extends State<CreatePostPage> {
       body: SafeArea(
         child: Stack(
           children: [
+            Positioned(
+              left: MediaQuery.of(context).size.width * 0.25,
+              child: Text("글을 작성하고 사람들과 공유해보세요"),
+            ),
             // 배경 원들
             Positioned(
               top: MediaQuery.of(context).size.height * 0.05,
@@ -112,6 +116,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         controller: titleController,
                         decoration: InputDecoration(
                           hintText: '제목 작성',
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              )),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -131,15 +140,30 @@ class _CreatePostPageState extends State<CreatePostPage> {
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: '내용 작성',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: _uploadPost,
-                        child: const Text('포스트 업로드'),
+                      Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xffF4F9FF),
+                            foregroundColor: Colors.black,
+                            surfaceTintColor: Colors.grey,
+                          ),
+                          onPressed: _uploadPost,
+                          child: const Text(
+                            '포스트 업로드',
+                          ),
+                        ),
                       ),
                     ],
                   ),
