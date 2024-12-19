@@ -71,7 +71,7 @@ class PostContainer extends StatelessWidget {
             children: [
               // 제목 표시
               Text(
-                '${post.title} | ${post.author}', // 작성자 이름 추가
+                '${post.title} | ${post.author}',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
