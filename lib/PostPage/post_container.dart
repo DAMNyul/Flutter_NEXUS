@@ -124,7 +124,7 @@ class PostContainer extends StatelessWidget {
 
   // 내용을 20자 이하로 자르고 나머지는 '...'으로 대체
   String _truncateContent(String content) {
-    const int maxLength = 20; // 최대 글자 수
+    const int maxLength = 27; // 최대 글자 수
     if (content.length > maxLength) {
       return '${content.substring(0, maxLength)}...';
     }
