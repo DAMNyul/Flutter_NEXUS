@@ -5,6 +5,7 @@ class CurrentPageProvider with ChangeNotifier {
   int _currentPage = 0;
 
   int get currentPage => _currentPage;
+
   void setCurrentPage(int page) {
     _currentPage = page;
     notifyListeners();
@@ -31,12 +32,12 @@ class PostProvider extends ChangeNotifier {
     }
   }
 
-  void addPost(String title, String content, String currentUserId) {
+  void addPost(String title, String content, String author) {
     final newPost = Post(
       id: DateTime.now().toIso8601String(), // 고유 ID 생성
       title: title,
       content: content,
-      userId: currentUserId,
+      author: author, // 작성자 이름 추가
     );
 
     _posts.add(newPost);

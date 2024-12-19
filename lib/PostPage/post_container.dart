@@ -19,6 +19,14 @@ class PostContainer extends StatelessWidget {
     final postProvider = Provider.of<PostProvider>(context);
     final bool isLiked = post.likedUsers.contains(currentUserId);
 
+    String truncateContent(String content) {
+      const int maxLength = 55; // 최대 글자 수
+      if (content.length > maxLength) {
+        return '${content.substring(0, maxLength)}...';
+      }
+      return content;
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: GestureDetector(
@@ -36,11 +44,14 @@ class PostContainer extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.5),
+            ),
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withOpacity(0.01),
                 blurRadius: 5,
                 spreadRadius: 2,
                 offset: const Offset(0, 3),
@@ -50,16 +61,18 @@ class PostContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // 제목 표시
               Text(
-                post.title,
+                '${post.title} | ${post.author}', // 작성자 이름 추가
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
+              // 내용 표시 (20자 제한 적용)
               Text(
-                post.content,
+                truncateContent(post.content),
                 style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black87,
