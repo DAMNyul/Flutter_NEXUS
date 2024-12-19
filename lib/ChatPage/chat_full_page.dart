@@ -36,10 +36,11 @@ class _ChatFullPageState extends State<ChatFullPage> {
   // 입력된 메시지를 저장하고 화면을 업데이트
   void saveInputValue() {
     setState(() {
-      // 입력값 저장
       if (textController.text.isEmpty) {
-        SnackBar(
-          content: Text('메시지를 작성해주세요!'),
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('메시지를 작성해주세요!'),
+          ),
         );
         return;
       }
@@ -47,6 +48,14 @@ class _ChatFullPageState extends State<ChatFullPage> {
       textController.clear(); // 입력 필드 초기화
     });
     _saveMessages(); // 메시지 저장
+  }
+
+  // 메시지 삭제
+  void deleteMessage(int index) {
+    setState(() {
+      messages.removeAt(index); // 특정 인덱스의 메시지를 삭제
+    });
+    _saveMessages(); // 변경 사항 저장
   }
 
   @override
@@ -66,7 +75,7 @@ class _ChatFullPageState extends State<ChatFullPage> {
           ],
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             // 뒤로 가기 전에 메시지를 저장
             _saveMessages();
@@ -87,19 +96,32 @@ class _ChatFullPageState extends State<ChatFullPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFFE3E3),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          messages[index],
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w600,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFE3E3),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                messages[index],
+                                style: const TextStyle(
+                                  fontSize: 17.5,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              deleteMessage(index); // 메시지 삭제
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   );
@@ -120,7 +142,7 @@ class _ChatFullPageState extends State<ChatFullPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(40),
                         ),
-                        hintText: '메시지를 입력하세요',
+                        hintText: '메시지를 입력하세요',
                         suffixIcon: IconButton(
                           onPressed: saveInputValue,
                           icon: const Icon(Icons.arrow_forward_ios_rounded),
