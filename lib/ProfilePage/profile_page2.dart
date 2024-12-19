@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nexus/ChatPage/chat_full_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage2 extends StatefulWidget {
   const ProfilePage2({super.key});
@@ -14,26 +15,47 @@ class _ProfilePage2State extends State<ProfilePage2> {
   int Follower = 0;
   int Following = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadFollowState();
+  }
+
+  // Load saved state from SharedPreferences
+  Future<void> _loadFollowState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isFollowed = prefs.getBool('isFollowed') ?? false;
+      Follower = prefs.getInt('Follower') ?? 0;
+    });
+  }
+
+  // Save follow state to SharedPreferences
+  Future<void> _saveFollowState() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isFollowed', isFollowed);
+    prefs.setInt('Follower', Follower);
+  }
+
   void clickFollowButton() {
     setState(() {
       isFollowed = !isFollowed;
-      if (isFollowed == true) {
+      if (isFollowed) {
         Follower++;
       } else {
         Follower--;
       }
+      _saveFollowState();
     });
   }
 
   void clickMessageButton() {
-    setState(() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ChatFullPage(),
-        ),
-      );
-    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ChatFullPage(),
+      ),
+    );
   }
 
   @override
@@ -107,7 +129,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                       MediaQuery.of(context).size.width * 0.27,
                                   child: ElevatedButton(
                                     onPressed: clickMessageButton,
-                                    child: Text("Message"),
+                                    child: const Text("Message"),
                                   ),
                                 ),
                               ],
@@ -126,7 +148,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                             ),
                             child: Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Follower",
                                   style: TextStyle(
                                     fontSize: 20,
@@ -136,7 +158,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                 ),
                                 Text(
                                   FollowerCount,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -153,7 +175,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                             ),
                             child: Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Following",
                                   style: TextStyle(
                                     fontSize: 20,
@@ -163,7 +185,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                                 ),
                                 Text(
                                   FollowingCount,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -175,7 +197,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
+                      height: MediaQuery.of(context).size.height * 0.05,
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.6,
