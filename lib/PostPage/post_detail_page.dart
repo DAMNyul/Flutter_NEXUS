@@ -111,23 +111,27 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // 게시물 헤더 (말풍선 스타일)
+                          // 게시물 헤더 (초록색 상자 + 말풍선)
                           Container(
-                            margin: const EdgeInsets.only(right: 40),
-                            child: Stack(
+                            padding: const EdgeInsets.all(16),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFE6F7ED),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // 말풍선 모양 컨테이너
-                                Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFE6F7ED),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(20),
-                                    ),
-                                  ),
+                                const CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.white,
+                                  child: Icon(Icons.person,
+                                      color: Colors.grey, size: 24),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -135,79 +139,62 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                       Text(
                                         widget.title,
                                         style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       const SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          const CircleAvatar(
-                                            radius: 15,
-                                            backgroundColor: Colors.white,
-                                            child: Icon(Icons.person,
-                                                color: Colors.grey, size: 20),
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                widget.author,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              Text(
-                                                '${widget.dateTime.year}년 ${widget.dateTime.month}월 ${widget.dateTime.day}일\n오후 ${widget.dateTime.hour}:${widget.dateTime.minute.toString().padLeft(2, '0')}',
-                                                style: const TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      Text(
+                                        widget.author,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${widget.dateTime.year}년 ${widget.dateTime.month}월 ${widget.dateTime.day}일',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                                // 말풍선 꼬리 부분
-                                Positioned(
-                                  right: -20,
-                                  top: 20,
-                                  child: CustomPaint(
-                                    size: const Size(20, 20),
-                                    painter: BubbleTrianglePainter(),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           const SizedBox(height: 16),
-                          // 본문 내용
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                          // 본문 내용 (하얀 박스)
+                          Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.1),
+                                  blurRadius: 5,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
                             child: Text(
                               widget.content,
                               style: const TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
                           const SizedBox(height: 16),
-                          // 좋아요 & 댓글 카운트
+                          // 좋아요 & 댓글 카운트 (초록색 박스 + 하얀 박스)
                           Align(
                             alignment: Alignment.centerRight,
                             child: Container(
-                              height: 36,
                               decoration: BoxDecoration(
                                 color: const Color(0xFFE6F7ED),
-                                borderRadius: BorderRadius.circular(18),
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -216,17 +203,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                     onTap: _toggleLike,
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
+                                          horizontal: 16, vertical: 8),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.circular(18),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.1),
-                                            spreadRadius: 1,
-                                            blurRadius: 3,
-                                          ),
-                                        ],
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Row(
                                         children: [
@@ -237,33 +217,22 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                             color: isLiked
                                                 ? Colors.red
                                                 : Colors.grey,
-                                            size: 20,
                                           ),
                                           const SizedBox(width: 8),
-                                          Text(
-                                            '$currentLikes',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
+                                          Text('$currentLikes'),
                                         ],
                                       ),
                                     ),
                                   ),
                                   Container(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                        horizontal: 16, vertical: 8),
                                     child: Row(
                                       children: [
-                                        const Icon(
-                                          Icons.chat_bubble_outline,
-                                          color: Colors.grey,
-                                          size: 20,
-                                        ),
+                                        const Icon(Icons.chat_bubble_outline,
+                                            color: Colors.grey),
                                         const SizedBox(width: 8),
-                                        Text(
-                                          '${currentComments.length}',
-                                          style: const TextStyle(fontSize: 14),
-                                        ),
+                                        Text('${currentComments.length}'),
                                       ],
                                     ),
                                   ),
@@ -273,49 +242,49 @@ class _PostDetailPageState extends State<PostDetailPage> {
                           ),
                           const SizedBox(height: 16),
                           // 댓글 목록
-                          ...currentComments.map((comment) => Container(
-                                margin: const EdgeInsets.only(bottom: 12),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const CircleAvatar(
-                                      radius: 14,
-                                      backgroundColor: Colors.grey,
-                                      child: Icon(
-                                        Icons.person,
+                          ...currentComments.map(
+                            (comment) => Container(
+                              margin: const EdgeInsets.only(bottom: 12),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const CircleAvatar(
+                                    radius: 14,
+                                    backgroundColor: Colors.grey,
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                      size: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
                                         color: Colors.white,
-                                        size: 16,
+                                        borderRadius: BorderRadius.circular(16),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.1),
+                                            spreadRadius: 1,
+                                            blurRadius: 3,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Text(
+                                        comment,
+                                        style: const TextStyle(fontSize: 14),
                                       ),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                          vertical: 12,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.1),
-                                              spreadRadius: 1,
-                                              blurRadius: 3,
-                                            ),
-                                          ],
-                                        ),
-                                        child: Text(
-                                          comment,
-                                          style: const TextStyle(fontSize: 14),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -377,25 +346,4 @@ class _PostDetailPageState extends State<PostDetailPage> {
     _commentController.dispose();
     super.dispose();
   }
-}
-
-// 말풍선 꼬리 부분을 그리는 CustomPainter
-class BubbleTrianglePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFFE6F7ED)
-      ..style = PaintingStyle.fill;
-
-    final path = Path()
-      ..moveTo(0, 0)
-      ..lineTo(size.width, size.height / 2)
-      ..lineTo(0, size.height)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
