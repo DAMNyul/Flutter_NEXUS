@@ -49,8 +49,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
   void _addComment() {
     if (_commentController.text.isNotEmpty) {
       setState(() {
-        currentComments.add(_commentController.text);
-        _commentController.clear();
+        currentComments.add(_commentController.text); // 댓글 추가
+        _commentController.clear(); // 입력 필드 초기화
       });
     }
   }
@@ -112,11 +112,12 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                     decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 0.3,
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 0.3,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.only(
                         left: 10,
@@ -179,7 +180,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
           ),
           Positioned(
             left: 250,
-            top: 400,
+            top: 370,
             child: Stack(
               children: [
                 Container(
@@ -192,6 +193,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2), // 그림자 색상
+                        spreadRadius: 1, // 그림자 퍼짐 정도
+                        blurRadius: 5, // 그림자 흐림 정도
+                        offset: const Offset(2, 3), // 그림자 위치
+                      ),
+                    ],
                     color: Color(0xFFDEFFEE),
                   ),
                 ),
@@ -204,6 +213,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1), // 그림자 색상
+                          spreadRadius: 0.5, // 그림자 퍼짐 정도
+                          blurRadius: 5, // 그림자 흐림 정도
+                          offset: const Offset(2, 3), // 그림자 위치
+                        ),
+                      ],
                     ),
                     child: Row(
                       children: [
@@ -225,6 +242,14 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1), // 그림자 색상
+                          spreadRadius: 0.5, // 그림자 퍼짐 정도
+                          blurRadius: 5, // 그림자 흐림 정도
+                          offset: const Offset(2, 3), // 그림자 위치
+                        ),
+                      ],
                     ),
                     child: Row(
                       children: [
@@ -232,12 +257,65 @@ class _PostDetailPageState extends State<PostDetailPage> {
                           Icons.chat_outlined,
                           color: Colors.grey,
                         ),
-                        Text('${widget.comments}'),
+                        Text('${widget.comments.length}'),
                       ],
                     ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            left: 50,
+            top: 450,
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              width: 300,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 0.3,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2), // 그림자 색상
+                    spreadRadius: 1, // 그림자 퍼짐 정도
+                    blurRadius: 5, // 그림자 흐림 정도
+                    offset: const Offset(2, 3), // 그림자 위치
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _commentController,
+                decoration: InputDecoration(
+                  hintText: '댓글을 입력해!',
+                  border: InputBorder.none,
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: _addComment, // 댓글 추가
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 50,
+            top: 510,
+            child: Column(
+              children: currentComments.map((comment) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(comment),
+                );
+              }).toList(),
             ),
           ),
         ],
