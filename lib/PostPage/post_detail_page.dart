@@ -106,7 +106,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
               padding: const EdgeInsets.only(left: 50, right: 50),
               child: Container(
                 width: 300,
-                height: 400,
+                height: 350,
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -130,6 +130,114 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            left: 20,
+            top: 40,
+            child: Container(
+              width: 200, // 너비 조정
+              height: 100, // 높이 조정
+              decoration: BoxDecoration(
+                color: const Color(0xFFDEFFEE), // 배경 색상
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(100), // 각 모서리의 둥근 정도 조정
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2), // 그림자 색상
+                    spreadRadius: 1, // 그림자 퍼짐 정도
+                    blurRadius: 5, // 그림자 흐림 정도
+                    offset: const Offset(2, 3), // 그림자 위치
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      widget.author,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    Text('')
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 250,
+            top: 400,
+            child: Stack(
+              children: [
+                Container(
+                  width: 120,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    color: Color(0xFFDEFFEE),
+                  ),
+                ),
+                Positioned(
+                  left: 20,
+                  top: 20,
+                  width: 40,
+                  height: 30,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          isLiked ? Icons.favorite : Icons.favorite_border,
+                          color: isLiked ? Colors.red : Colors.grey,
+                        ),
+                        Text('${widget.likes}'),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 70,
+                  top: 20,
+                  width: 40,
+                  height: 30,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.chat_outlined,
+                          color: Colors.grey,
+                        ),
+                        Text('${widget.comments}'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

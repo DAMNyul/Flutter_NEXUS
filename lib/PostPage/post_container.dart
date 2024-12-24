@@ -48,7 +48,7 @@ class PostContainer extends StatelessWidget {
                 author: post.author, // 작성자 전달
                 dateTime: post.createdAt, // 작성 시간 전달
                 likes: post.likeCount, // 좋아요 개수 전달
-                comments: post.comments ?? [], // 댓글 목록 전달 (null 방지)
+                comments: post.comments, // 댓글 목록 전달 (null 방지)
               ),
             ),
           );
