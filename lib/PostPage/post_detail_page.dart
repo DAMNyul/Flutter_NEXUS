@@ -49,8 +49,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
   void _addComment() {
     if (_commentController.text.isNotEmpty) {
       setState(() {
-        currentComments.add(_commentController.text); // 댓글 추가
-        _commentController.clear(); // 입력 필드 초기화
+        currentComments.add(_commentController.text);
+        _commentController.clear();
       });
     }
   }
@@ -289,33 +289,11 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 ],
               ),
               child: TextField(
-                controller: _commentController,
                 decoration: InputDecoration(
                   hintText: '댓글을 입력해!',
                   border: InputBorder.none,
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: _addComment, // 댓글 추가
-                  ),
                 ),
               ),
-            ),
-          ),
-          Positioned(
-            left: 50,
-            top: 510,
-            child: Column(
-              children: currentComments.map((comment) {
-                return Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(comment),
-                );
-              }).toList(),
             ),
           ),
         ],
