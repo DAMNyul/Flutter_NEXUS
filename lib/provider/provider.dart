@@ -17,11 +17,12 @@ class PostProvider extends ChangeNotifier {
 
   List<Post> get posts {
     // 좋아요 수 내림차순, 같을 경우 최신 순으로 정렬
-    return _posts.sorted((a, b) {
-      int likeComparison = b.likeCount.compareTo(a.likeCount);
-      if (likeComparison != 0) return likeComparison;
-      return b.createdAt.compareTo(a.createdAt);
-    });
+    return List<Post>.from(_posts)
+      ..sort((a, b) {
+        int likeComparison = b.likeCount.compareTo(a.likeCount);
+        if (likeComparison != 0) return likeComparison;
+        return b.createdAt.compareTo(a.createdAt);
+      });
   }
 
   void togglePostLike(String postId, String currentUserId) {
@@ -29,15 +30,22 @@ class PostProvider extends ChangeNotifier {
     if (postIndex != -1) {
       _posts[postIndex].toggleLike(currentUserId);
       notifyListeners();
+    } else {
+      debugPrint('Post with ID $postId not found.');
     }
   }
 
   void addPost(String title, String content, String author) {
+    if (title.isEmpty || content.isEmpty) {
+      debugPrint('Title and content cannot be empty.');
+      return;
+    }
+
     final newPost = Post(
       id: DateTime.now().toIso8601String(), // 고유 ID 생성
       title: title,
       content: content,
-      author: author, // 작성자 이름 추가
+      author: author.isNotEmpty ? author : 'Unknown', // 기본 작성자 설정
     );
 
     _posts.add(newPost);

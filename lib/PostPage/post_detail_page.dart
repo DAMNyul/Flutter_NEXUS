@@ -26,6 +26,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
   late int currentLikes;
   late List<String> currentComments;
   final TextEditingController _commentController = TextEditingController();
+  final Map<int, TextEditingController> _replyControllers = {};
   bool isLiked = false;
 
   @override
@@ -37,12 +38,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
   void _toggleLike() {
     setState(() {
-      if (isLiked) {
-        currentLikes--;
-      } else {
-        currentLikes++;
-      }
       isLiked = !isLiked;
+      currentLikes += isLiked ? 1 : -1;
     });
   }
 
@@ -50,7 +47,16 @@ class _PostDetailPageState extends State<PostDetailPage> {
     if (_commentController.text.isNotEmpty) {
       setState(() {
         currentComments.add(_commentController.text);
-        _commentController.clear();
+        _commentController.clear(); // 댓글 추가 후 텍스트 필드 비우기
+      });
+    }
+  }
+
+  void _addReply(int index) {
+    if (_replyControllers[index]!.text.isNotEmpty) {
+      setState(() {
+        currentComments[index] += "\n  - ${_replyControllers[index]!.text}";
+        _replyControllers[index]!.clear();
       });
     }
   }
@@ -62,13 +68,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          '',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
@@ -137,22 +136,22 @@ class _PostDetailPageState extends State<PostDetailPage> {
             left: 20,
             top: 40,
             child: Container(
-              width: 200, // 너비 조정
-              height: 100, // 높이 조정
+              width: 200,
+              height: 100,
               decoration: BoxDecoration(
-                color: const Color(0xFFDEFFEE), // 배경 색상
+                color: const Color(0xFFDEFFEE),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(100), // 각 모서리의 둥근 정도 조정
+                  bottomRight: Radius.circular(100),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), // 그림자 색상
-                    spreadRadius: 1, // 그림자 퍼짐 정도
-                    blurRadius: 5, // 그림자 흐림 정도
-                    offset: const Offset(2, 3), // 그림자 위치
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(2, 3),
                   ),
                 ],
               ),
@@ -195,10 +194,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2), // 그림자 색상
-                        spreadRadius: 1, // 그림자 퍼짐 정도
-                        blurRadius: 5, // 그림자 흐림 정도
-                        offset: const Offset(2, 3), // 그림자 위치
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: const Offset(2, 3),
                       ),
                     ],
                     color: Color(0xFFDEFFEE),
@@ -215,10 +214,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.1), // 그림자 색상
-                          spreadRadius: 0.5, // 그림자 퍼짐 정도
-                          blurRadius: 5, // 그림자 흐림 정도
-                          offset: const Offset(2, 3), // 그림자 위치
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 0.5,
+                          blurRadius: 5,
+                          offset: const Offset(2, 3),
                         ),
                       ],
                     ),
@@ -228,7 +227,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                           isLiked ? Icons.favorite : Icons.favorite_border,
                           color: isLiked ? Colors.red : Colors.grey,
                         ),
-                        Text('${widget.likes}'),
+                        Text('$currentLikes'),
                       ],
                     ),
                   ),
@@ -244,10 +243,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.1), // 그림자 색상
-                          spreadRadius: 0.5, // 그림자 퍼짐 정도
-                          blurRadius: 5, // 그림자 흐림 정도
-                          offset: const Offset(2, 3), // 그림자 위치
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 0.5,
+                          blurRadius: 5,
+                          offset: const Offset(2, 3),
                         ),
                       ],
                     ),
@@ -281,18 +280,113 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.2), // 그림자 색상
-                    spreadRadius: 1, // 그림자 퍼짐 정도
-                    blurRadius: 5, // 그림자 흐림 정도
-                    offset: const Offset(2, 3), // 그림자 위치
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(2, 3),
                   ),
                 ],
               ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: '댓글을 입력해!',
-                  border: InputBorder.none,
-                ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _commentController,
+                      decoration: InputDecoration(
+                        hintText: '댓글을 입력해!',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: _addComment, // 댓글 추가 버튼
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // 댓글 리스트
+          Positioned(
+            left: 50,
+            top: 520,
+            child: SizedBox(
+              width: 300,
+              height: 200,
+              child: ListView.builder(
+                itemCount: currentComments.length,
+                itemBuilder: (context, index) {
+                  if (_replyControllers[index] == null) {
+                    _replyControllers[index] = TextEditingController();
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 댓글 컨테이너
+                        Container(
+                          padding: EdgeInsets.all(10.0),
+                          width: 280,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF1F1F1),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 0.5,
+                                blurRadius: 5,
+                                offset: const Offset(2, 3),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            currentComments[index],
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        // 대댓글 입력 필드
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 5),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 230,
+                                height: 40,
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(25),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 5,
+                                      offset: const Offset(2, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: TextField(
+                                  controller: _replyControllers[index],
+                                  decoration: InputDecoration(
+                                    hintText: '대댓글을 입력해!',
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.send),
+                                onPressed: () {
+                                  _addReply(index); // 대댓글 추가
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -304,6 +398,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
   @override
   void dispose() {
     _commentController.dispose();
+    for (var controller in _replyControllers.values) {
+      controller.dispose();
+    }
     super.dispose();
   }
 }

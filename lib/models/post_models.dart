@@ -1,11 +1,11 @@
 class Post {
-  String id;
-  String title;
-  String content;
-  String author; // 작성자
-  Set<String> likedUsers; // 좋아요 누른 사용자들
-  DateTime createdAt; // 작성 시간
-  List<String> comments; // 댓글 목록
+  final String id;
+  final String title;
+  final String content;
+  final String author;
+  final Set<String> likedUsers;
+  final DateTime createdAt;
+  final List<String> comments;
 
   Post({
     required this.id,
