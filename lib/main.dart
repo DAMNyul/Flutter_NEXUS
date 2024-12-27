@@ -41,7 +41,6 @@ class _MyAppState extends State<MyApp> {
               PostPage(
                   currentUserId:
                       'current_user_id'), // PostPage에서 PostProvider를 사용
-              const ChatPage(),
               const ProfilePage(),
             ][currentPageProvider.currentPage];
           },
