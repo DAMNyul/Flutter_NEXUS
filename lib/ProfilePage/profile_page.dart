@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_nexus/ProjectPage/nexus_card_collecting.dart';
 import 'package:flutter_nexus/models/post_models.dart';
 import 'package:flutter_nexus/ProjectPage/full_page_collecting.dart';
