@@ -14,239 +14,194 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int following = 0; // Following 값
+  int following = 234;
+  int follower = 123;
 
   @override
   void initState() {
     super.initState();
-    _loadFollowingState(); // Following 상태 로드
+    _loadFollowingState();
   }
 
-  // SharedPreferences에서 Following 상태 로드
   Future<void> _loadFollowingState() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      following = prefs.getInt('Follower') ?? 0; // Follower 값으로 설정
+      following = prefs.getInt('Following') ?? 234;
+      follower = prefs.getInt('Follower') ?? 123;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Transform.translate(
-            offset: const Offset(100, 50),
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(45),
+          // Profile Section
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Color(0xFFF5F5F5), // 더 밝은 회색으로 변경
+                  child: Icon(
+                    Icons.person,
+                    size: 40,
+                    color: Color(0xFFDDDDDD), // 아이콘 색상을 더 밝게
+                  ),
                 ),
-                color: Color(0xfff4f9ff),
-              ),
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: screenWidth * 0.80,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: Column(
+                const SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: screenWidth * 0.5,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: const Center(
-                        child: Text(
-                          "Username",
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    const Text(
+                      '송재욱',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            const Text(
+                              'Follower',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black54, // 글자 색상을 더 연하게
+                              ),
+                            ),
+                            Text(
+                              '$follower',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: screenWidth * 0.6,
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Color(0xfff4f9ff),
+                        const SizedBox(width: 24),
+                        Column(
+                          children: [
+                            const Text(
+                              'Following',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black54, // 글자 색상을 더 연하게
+                              ),
                             ),
-                            child: const Column(
-                              children: [
-                                Text(
-                                  "Follower",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  "0",
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
+                            Text(
+                              '$following',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: screenWidth * 0.1,
-                          ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Color(0xfff4f9ff),
-                            ),
-                            child: Column(
-                              children: [
-                                const Text(
-                                  "Following",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  "$following", // Following 값 표시
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
-                    ),
-                    // Projects Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Projects",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          SizedBox(
-                            height: 200, // 고정된 높이로 설정
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const FullPageCollecting()),
-                                    );
-                                  },
-                                  child: const NexusCardCollecting(),
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.05,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const FullPageCollecting()),
-                                    );
-                                  },
-                                  child: const NexusCardCollecting(),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                    ),
-                    // Posts Section
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Posts",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          SizedBox(
-                            height: 200, // 고정된 높이로 설정
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                PostContainer(
-                                  post: Post(
-                                    id: '1',
-                                    title: 'Post Title 1',
-                                    content: 'This is the content of post 1.',
-                                    author: 'Author 1',
-                                    createdAt: DateTime.now(),
-                                    likeCount: 10,
-                                    comments: [],
-                                    likedUsers: {},
-                                  ),
-                                  currentUserId: 'currentUserId',
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.05,
-                                ),
-                                PostContainer(
-                                  post: Post(
-                                    id: '2',
-                                    title: 'Post Title 2',
-                                    content: 'This is the content of post 2.',
-                                    author: 'Author 2',
-                                    createdAt: DateTime.now(),
-                                    likeCount: 20,
-                                    comments: [],
-                                    likedUsers: {},
-                                  ),
-                                  currentUserId: 'currentUserId',
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
+              ],
+            ),
+          ),
+
+          // Projects Section
+          const Padding(
+            padding: EdgeInsets.only(left: 20, top: 20, bottom: 12),
+            child: Text(
+              'Projects',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87, // 제목 색상 조정
               ),
             ),
           ),
-          SvgPicture.asset(
-            'image/profile.svg',
-            height: 200,
+          SizedBox(
+            height: 180,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              scrollDirection: Axis.horizontal,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FullPageCollecting(),
+                      ),
+                    );
+                  },
+                  child: const NexusCardCollecting(),
+                ),
+                const SizedBox(width: 15),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FullPageCollecting(),
+                      ),
+                    );
+                  },
+                  child: const NexusCardCollecting(),
+                ),
+              ],
+            ),
           ),
+
+          // Posts Section
+          const Padding(
+            padding: EdgeInsets.only(left: 20, top: 30, bottom: 12),
+            child: Text(
+              'Posts',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87, // 제목 색상 조정
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                PostContainer(
+                  post: Post(
+                    id: '1',
+                    title: '나 사실 개발자임',
+                    content: '사실 나 프론트부터 백까지 다 혼자 할 수 있음 ㅋㅋㅋ...',
+                    author: '송재욱',
+                    createdAt: DateTime.now(),
+                    likeCount: 10,
+                    comments: [],
+                    likedUsers: {},
+                  ),
+                  currentUserId: 'currentUserId',
+                ),
+                const SizedBox(height: 15),
+                PostContainer(
+                  post: Post(
+                    id: '2',
+                    title: '아니 넥서스',
+                    content: '폼 미쳤네 ㅋㅋ아니 글쌔 어떤일이 있었냐면 ㅋㅋ 이거 ㄹㅇ ㅋㅋ 임...',
+                    author: '송재욱',
+                    createdAt: DateTime.now(),
+                    likeCount: 20,
+                    comments: [],
+                    likedUsers: {},
+                  ),
+                  currentUserId: 'currentUserId',
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
         ],
       ),
     );

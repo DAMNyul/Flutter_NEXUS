@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PostDetailPage extends StatefulWidget {
   final String title;
   final String content;
-  final String author;
+  final String author = "송재욱";
   final DateTime dateTime;
   final int likes;
   final List<String> comments;
@@ -12,7 +13,6 @@ class PostDetailPage extends StatefulWidget {
     super.key,
     required this.title,
     required this.content,
-    required this.author,
     required this.dateTime,
     required this.likes,
     required this.comments,
@@ -161,12 +161,21 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          'image/profile.svg',
+                          height: 35,
+                          width: 35,
+                        ),
+                        Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       widget.author,

@@ -44,8 +44,7 @@ class PostContainer extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => PostDetailPage(
                 title: post.title,
-                content: post.content,
-                author: post.author, // 작성자 전달
+                content: post.content, // 작성자 전달
                 dateTime: post.createdAt, // 작성 시간 전달
                 likes: post.likeCount, // 좋아요 개수 전달
                 comments: post.comments, // 댓글 목록 전달 (null 방지)
@@ -75,7 +74,7 @@ class PostContainer extends StatelessWidget {
             children: [
               // 제목 표시
               Text(
-                '${post.title} | ${post.author}',
+                '${post.title} | 송재욱',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
