@@ -47,6 +47,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
     if (_commentController.text.isNotEmpty) {
       setState(() {
         currentComments.add(_commentController.text);
+        widget.comments.add(_commentController.text);
         _commentController.clear(); // 댓글 추가 후 텍스트 필드 비우기
       });
     }
