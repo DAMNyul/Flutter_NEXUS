@@ -3,6 +3,7 @@ class Post {
   final String title;
   final String content;
   final String author;
+
   final Set<String> likedUsers;
   final DateTime createdAt;
   final List<String> comments;
@@ -15,6 +16,7 @@ class Post {
     Set<String>? likedUsers,
     DateTime? createdAt,
     List<String>? comments,
+    required int likeCount,
   })  : likedUsers = likedUsers ?? {},
         createdAt = createdAt ?? DateTime.now(),
         comments = comments ?? []; // 기본값으로 빈 리스트 설정

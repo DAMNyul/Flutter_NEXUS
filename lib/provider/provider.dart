@@ -45,7 +45,8 @@ class PostProvider extends ChangeNotifier {
       id: DateTime.now().toIso8601String(), // 고유 ID 생성
       title: title,
       content: content,
-      author: author.isNotEmpty ? author : 'Unknown', // 기본 작성자 설정
+      author: author.isNotEmpty ? author : '송재욱',
+      likeCount: 20, // 기본 작성자 설정
     );
 
     _posts.add(newPost);

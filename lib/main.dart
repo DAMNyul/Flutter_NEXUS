@@ -38,9 +38,8 @@ class _MyAppState extends State<MyApp> {
             return [
               const MainPage(),
               const ProjectPage(),
-              PostPage(
-                  currentUserId:
-                      'current_user_id'), // PostPage에서 PostProvider를 사용
+              PostPage(currentUserId: 'current_user_id'),
+              const ChatPage(), // ChatPage 추가
               const ProfilePage(),
             ][currentPageProvider.currentPage];
           },

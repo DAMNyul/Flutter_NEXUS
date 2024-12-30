@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_nexus/ProjectPage/nexus_card_collecting.dart';
+import 'package:flutter_nexus/models/post_models.dart';
+import 'package:flutter_nexus/ProjectPage/full_page_collecting.dart';
+import 'package:flutter_nexus/PostPage/post_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,6 +32,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -42,13 +48,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Color(0xfff4f9ff),
               ),
               height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width * 0.80,
+              width: screenWidth * 0.80,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Column(
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: screenWidth * 0.5,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: const Center(
                         child: Text(
@@ -61,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      width: screenWidth * 0.6,
                       child: Row(
                         children: [
                           Container(
@@ -89,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.1,
+                            width: screenWidth * 0.1,
                           ),
                           Container(
                             decoration: const BoxDecoration(
@@ -121,70 +127,111 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.03,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      height: MediaQuery.of(context).size.height * 0.15,
+                    // Projects Section
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: const Color(0x5fe76f00),
+                          const Text(
+                            "Projects",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                             ),
-                            width: 100,
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          SizedBox(
+                            height: 200, // 고정된 높이로 설정
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
                               children: [
-                                SvgPicture.asset(
-                                  'image/java.svg',
-                                  width: 27,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FullPageCollecting()),
+                                    );
+                                  },
+                                  child: const NexusCardCollecting(),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: screenWidth * 0.05,
                                 ),
-                                const Text(
-                                  "Java",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Color(0xffe76f00),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FullPageCollecting()),
+                                    );
+                                  },
+                                  child: const NexusCardCollecting(),
+                                ),
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: const Color(0x5f70AD51),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    // Posts Section
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Posts",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                             ),
-                            width: 150,
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
+                          ),
+                          SizedBox(
+                            height: 200, // 고정된 높이로 설정
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
                               children: [
-                                SvgPicture.asset(
-                                  'image/spring.svg',
-                                  width: 27,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Text(
-                                  "Spring",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Color(0xff70AD51),
-                                    fontWeight: FontWeight.w400,
+                                PostContainer(
+                                  post: Post(
+                                    id: '1',
+                                    title: 'Post Title 1',
+                                    content: 'This is the content of post 1.',
+                                    author: 'Author 1',
+                                    createdAt: DateTime.now(),
+                                    likeCount: 10,
+                                    comments: [],
+                                    likedUsers: {},
                                   ),
-                                )
+                                  currentUserId: 'currentUserId',
+                                ),
+                                SizedBox(
+                                  width: screenWidth * 0.05,
+                                ),
+                                PostContainer(
+                                  post: Post(
+                                    id: '2',
+                                    title: 'Post Title 2',
+                                    content: 'This is the content of post 2.',
+                                    author: 'Author 2',
+                                    createdAt: DateTime.now(),
+                                    likeCount: 20,
+                                    comments: [],
+                                    likedUsers: {},
+                                  ),
+                                  currentUserId: 'currentUserId',
+                                ),
                               ],
                             ),
                           ),
